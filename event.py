@@ -45,6 +45,7 @@ def motorcycle_parked_event(new_motorcycle, motorcycle_parked, remain_motorcycle
     if new_motorcycle <= remain_motorcycle_parking_space:
         remain_motorcycle_parking_space -= new_motorcycle
         motorcycle_parked += new_motorcycle
+        motorcycle_cannot_park = 0
     else:
         motorcycle_cannot_park = new_motorcycle - remain_motorcycle_parking_space
         motorcycle_parked += remain_motorcycle_parking_space
@@ -56,6 +57,7 @@ def car_parked_event(new_car, car_parked, remain_car_parking_space):
     if new_car <= remain_car_parking_space:
         remain_car_parking_space -= new_car
         car_parked += new_car
+        car_cannot_park = 0
     else:
         car_cannot_park = new_car - remain_car_parking_space
         car_parked += remain_car_parking_space
