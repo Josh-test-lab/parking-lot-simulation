@@ -18,18 +18,25 @@ def bicycle_parked_in_motorcycle_space(new_bicycle, bicycle_parked, remain_motor
         space = new_bicycle / 2
         new_bicycle = 0
     else:
-        space = int(new_bicycle / 2) + 1
+        space = int(new_bicycle / 2)
         new_bicycle = 1
 
-    if bicycle_parked % 2 == 1 and new_bicycle == 1:
-        space -= 1
-        new_bicycle = 0
-
     if space <= remain_motorcycle_parking_space:
-        remain_motorcycle_parking_space += space
+        remain_motorcycle_parking_space -= space
+        bicycle_parked += (2 * space)
         bicycle_cannot_park = 0
     else:
-        bicycle_cannot_park = 2 * (space - remain_motorcycle_parking_space) - new_bicycle
+        bicycle_cannot_park = 2 * (space - remain_motorcycle_parking_space)
+        bicycle_parked += (2 * remain_motorcycle_parking_space)
         remain_motorcycle_parking_space = 0
-        new_bicycle = 0
+
+    if new_bicycle == 1:
+        if bicycle_parked % 2 == 1:
+            bicycle_parked += 1
+        elif remain_motorcycle_parking_space > 0:
+            bicycle_parked += 1
+            remain_motorcycle_parking_space -= 1
+        elif remain_motorcycle_parking_space <= 0:
+            bicycle_cannot_park += 1
+    new_bicycle = 0    
     return new_bicycle, bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park
