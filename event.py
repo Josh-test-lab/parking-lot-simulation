@@ -38,5 +38,17 @@ def bicycle_parked_in_motorcycle_space(new_bicycle, bicycle_parked, remain_motor
             remain_motorcycle_parking_space -= 1
         elif remain_motorcycle_parking_space <= 0:
             bicycle_cannot_park += 1
-    new_bicycle = 0    
+    new_bicycle = 0
     return new_bicycle, bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park
+
+def motorcycle_parked():
+    return
+
+def car_parked():
+    return
+
+
+
+
+
+

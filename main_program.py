@@ -14,8 +14,9 @@ from event import *
 
 ### main program
 # initial value
-t = 0
-max_simulation_time = 10 * 365 * 24
+t = 0 # simulation clock
+clock = 0 # clock in a day
+max_simulation_time = 10 * 365 * 24 # total time
 
 # the parking spaces
 remain_car_parking_space = 90
