@@ -32,6 +32,4 @@ new_car = 0
 new_motorcycle = 0
 new_bicycle = 0
 
-from event import motorcycle_parked_event
-print(motorcycle_parked_event(new_car, car_parked, remain_car_parking_space))
 
