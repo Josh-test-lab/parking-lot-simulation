@@ -19,7 +19,7 @@ clock = 0 # clock in a day
 max_simulation_time = 10 * 365 * 24 # total time
 
 # the parking spaces
-remain_car_parking_space = 90
+remain_car_parking_space = 9
 remain_motorcycle_parking_space = 627
 
 # number of spaces which be parked
@@ -28,11 +28,10 @@ motorcycle_parked = 0
 bicycle_parked = 0
 
 # number of new vehicle 
-new_car = 0
+new_car = 10
 new_motorcycle = 0
 new_bicycle = 0
 
 
-
-
+car_parked_event(new_car, car_parked, remain_car_parking_space)
 
