@@ -42,6 +42,9 @@ def bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain
     return bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park
 
 def motorcycle_parked_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space):
+    if new_motorcycle == 0:
+        return motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park
+
     if new_motorcycle <= remain_motorcycle_parking_space:
         remain_motorcycle_parking_space -= new_motorcycle
         motorcycle_parked += new_motorcycle
@@ -54,6 +57,9 @@ def motorcycle_parked_event(new_motorcycle, motorcycle_parked, remain_motorcycle
     return motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park
 
 def car_parked_event(new_car, car_parked, remain_car_parking_space):
+    if new_car == 0:
+        return car_parked, remain_car_parking_space, car_cannot_park
+
     if new_car <= remain_car_parking_space:
         remain_car_parking_space -= new_car
         car_parked += new_car
@@ -65,9 +71,28 @@ def car_parked_event(new_car, car_parked, remain_car_parking_space):
     #new_car = 0
     return car_parked, remain_car_parking_space, car_cannot_park
 
+def bicycle_leave_event():
+    return
 
+def motorcycle_leave_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space):
+    if new_motorcycle == 0:
+        return new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space
+    
+    if motorcycle_parked < new_motorcycle:
+        motorcycle_leave_failed = new_motorcycle - motorcycle_parked
+        new_motorcycle = motorcycle_parked
 
+    if new_motorcycle + remain_motorcycle_parking_space <= max_motorcycle_parking_space:
+        remain_motorcycle_parking_space += new_motorcycle
+        motorcycle_parked -= new_motorcycle
+    else:
+        motorcycle_leave_failed += (new_motorcycle + remain_motorcycle_parking_space - max_motorcycle_parking_space)
+        remain_motorcycle_parking_space = max_motorcycle_parking_space
+        motorcycle_parked = 0
+        
+    #new_motorcycle = 0
+    return motorcycle_parked, remain_motorcycle_parking_space, motorcycle_leave_failed
 
-
-
+def car_leave_event():
+    return
 
