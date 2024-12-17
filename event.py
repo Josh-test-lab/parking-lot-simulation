@@ -75,8 +75,8 @@ def bicycle_leave_event():
     return
 
 def motorcycle_leave_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space):
+    motorcycle_leave_failed = 0
     if new_motorcycle == 0:
-        motorcycle_leave_failed = 0
         return motorcycle_parked, remain_motorcycle_parking_space, motorcycle_leave_failed
     
     if motorcycle_parked < new_motorcycle:
