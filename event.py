@@ -71,29 +71,46 @@ def car_parked_event(new_car, car_parked, remain_car_parking_space):
     #new_car = 0
     return car_parked, remain_car_parking_space, car_cannot_park
 
-def bicycle_leave_event():
+def bicycle_left_event():
     return
 
-def motorcycle_leave_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space):
-    motorcycle_leave_failed = 0
+def motorcycle_left_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space):
+    motorcycle_left_failed = 0
     if new_motorcycle == 0:
-        return motorcycle_parked, remain_motorcycle_parking_space, motorcycle_leave_failed
+        return motorcycle_parked, remain_motorcycle_parking_space, motorcycle_left_failed
     
     if motorcycle_parked < new_motorcycle:
-        motorcycle_leave_failed = new_motorcycle - motorcycle_parked
+        motorcycle_left_failed = new_motorcycle - motorcycle_parked
         new_motorcycle = motorcycle_parked
 
     if new_motorcycle + remain_motorcycle_parking_space <= max_motorcycle_parking_space:
         remain_motorcycle_parking_space += new_motorcycle
         motorcycle_parked -= new_motorcycle
     else:
-        motorcycle_leave_failed += (new_motorcycle + remain_motorcycle_parking_space - max_motorcycle_parking_space)
+        motorcycle_left_failed += (new_motorcycle + remain_motorcycle_parking_space - max_motorcycle_parking_space)
         remain_motorcycle_parking_space = max_motorcycle_parking_space
         motorcycle_parked = 0
         
     #new_motorcycle = 0
-    return motorcycle_parked, remain_motorcycle_parking_space, motorcycle_leave_failed
+    return motorcycle_parked, remain_motorcycle_parking_space, motorcycle_left_failed
 
-def car_leave_event():
-    return
+def car_left_event(new_car, car_parked, remain_car_parking_space, max_car_parking_space):
+    car_left_failed = 0
+    if new_car == 0:
+        return car_parked, remain_car_parking_space, car_left_failed
+    
+    if car_parked < new_car:
+        car_left_failed = new_car - car_parked
+        new_car = car_parked
+
+    if new_car + remain_car_parking_space <= max_car_parking_space:
+        remain_car_parking_space += new_car
+        car_parked -= new_car
+    else:
+        car_left_failed += (new_car + remain_car_parking_space - max_car_parking_space)
+        remain_car_parking_space = max_car_parking_space
+        car_parked = 0
+        
+    #new_car = 0
+    return car_parked, remain_car_parking_space, car_left_failed
 

@@ -24,16 +24,13 @@ max_motorcycle_parking_space = 627
 remain_car_parking_space = max_car_parking_space
 remain_motorcycle_parking_space = max_motorcycle_parking_space
 
-# number of spaces which be parked
+# number of spaces which be parked now
 car_parked = 0
-motorcycle_parked = 10
+motorcycle_parked = 0
 bicycle_parked = 0
 
-# number of new vehicle 
+# number of new vehicle enter/leave the parking lot
 new_car = 0
-new_motorcycle = 8
+new_motorcycle = 0
 new_bicycle = 0
 
-motorcycle_parked, remain_motorcycle_parking_space, motorcycle_leave_failed = motorcycle_leave_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space)
-
-[motorcycle_parked, remain_motorcycle_parking_space, motorcycle_leave_failed]
