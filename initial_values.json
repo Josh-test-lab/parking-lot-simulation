@@ -1,0 +1,32 @@
+{
+    "simulation_time": {
+        "max_simulation_time": {
+            "value": 87600,
+            "comment": "total time (10 years in hours)"
+        }
+    },
+    "parking_spaces": {
+        "max_car_parking_space": {
+            "value": 90,
+            "comment": "maximum car parking spaces"
+        },
+        "max_motorcycle_parking_space": {
+            "value": 627,
+            "comment": "maximum motorcycle parking spaces"
+        }
+    },
+    "number_of_spaces_parked": {
+        "car_parked": {
+            "value": 0,
+            "comment": "number of cars parked"
+        },
+        "motorcycle_parked": {
+            "value": 0,
+            "comment": "number of motorcycles parked"
+        },
+        "bicycle_parked": {
+            "value": 0,
+            "comment": "number of bicycles parked"
+        }
+    }
+}

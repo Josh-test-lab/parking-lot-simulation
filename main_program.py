@@ -9,8 +9,8 @@ Information:
 ### import module
 import random
 import time
-import numpy as np
 from event import *
+from function import *
 
 ### main program
 ## initial value
@@ -34,3 +34,12 @@ new_car = 0
 new_motorcycle = 0
 new_bicycle = 0
 
+while t <= max_simulation_time:
+    
+    # update time variable
+    if clock == 23:
+        clock == 0
+    else:
+        clock += 1
+
+    t += 1
