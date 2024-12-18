@@ -1,5 +1,5 @@
 # parking-lot-simulation
-Final project for class of simulation study, NDHU, R.O.C.(Taiwan) at fall 2024
+Final project for class of simulation study, NDHU, R.O.C. (Taiwan) at fall 2024.
 
 - Title:          Parking model for the parking lot in Zhixue station
 - Author:         Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee
