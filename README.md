@@ -1,17 +1,16 @@
 # Parking Lot Simulation
 ## Final project for class of simulation study, NDHU, R.O.C. (Taiwan) at fall 2024
 
-| **Title**:           | Parking model for the parking lot in Zhixue station           |
-|-----------------|-----------------------------------------------------------|
-| **Author**:          | Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee                     |
-| **Version**:         | 20241218                                                      |
-| **Reference**:       | Please view the complete reference below                      |
-| **Github**:          | https://github.com/Josh-test-lab/parking-lot-simulation/      |
-| **Patlat**:          | https://padlet.com/hyc0113/padlet-4e8wfbj1inqu66jo            |
-| **Google calender**: | https://calendar.google.com/calendar/embed?                   |src=c_7b5c1307c48fd66cdba1307b1c698cf1d1f71d90f64bf6466efbace8e6649e35%40group.calendar.google.com
-| **Flowchart**:       | https://drive.google.com/file/d/1tww7DYNMsvYH5C0S-FqWZNH1lViOU0wo/view?usp=drive_link                                                                     |
- **Report**:           | https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7             
- **Presentation**:     | https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7             
+**Title**            | Parking model for the parking lot in Zhixue station
+**Author**           | Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee
+**Version**          | 20241218
+**Reference**        | Please view the complete reference below
+**Github**           | https://github.com/Josh-test-lab/parking-lot-simulation/
+**Patlat**           | https://padlet.com/hyc0113/padlet-4e8wfbj1inqu66jo
+**Google calender**  | https://calendar.google.com/calendar/embed?src=c_7b5c1307c48fd66cdba1307b1c698cf1d1f71d90f64bf6466efbace8e6649e35%40group.calendar.google.com
+**Flowchart**        | https://drive.google.com/file/d/1tww7DYNMsvYH5C0S-FqWZNH1lViOU0wo/view?usp=drive_link
+**Report**           | https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7
+**Presentation**     | https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7
 
 --------------------------------------------------------------------------------------
 ## The Python files
