@@ -5,7 +5,7 @@
 |--------------------|---------------------------------------------------------------|
 **Title**            | Parking model for the parking lot in Zhixue station
 **Author**           | Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee
-**Version**          | 20241218
+**Version**          | 1131218
 **Reference**        | Please view the complete reference below
 **Github**           | https://github.com/Josh-test-lab/parking-lot-simulation/
 **Patlat**           | https://padlet.com/hyc0113/padlet-4e8wfbj1inqu66jo
