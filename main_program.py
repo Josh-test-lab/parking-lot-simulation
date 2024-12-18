@@ -32,10 +32,10 @@ bicycle_parked = 0
 # number of new vehicle enter/leave the parking lot
 new_car = 0
 new_motorcycle = 0
-new_bicycle = 7
+new_bicycle = 1
 
 bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park = bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space)
 [bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park]
 
-
-
+bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed = bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space)
+[bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed]
