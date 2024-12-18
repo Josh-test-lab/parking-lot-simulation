@@ -11,7 +11,7 @@ import random
 import numpy as np
 
 ### function
-# vehicle enter the parking lot events
+## vehicle enter the parking lot events
 def bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space):
     bicycle_cannot_park = 0
     if new_bicycle == 0:
@@ -69,7 +69,7 @@ def car_parked_event(new_car, car_parked, remain_car_parking_space):
     #new_car = 0
     return car_parked, remain_car_parking_space, car_cannot_park
 
-# vehicle leave the parking lot events
+## vehicle leave the parking lot events
 def bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space):
     bicycle_left_failed = 0
     if new_bicycle == 0:
