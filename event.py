@@ -70,7 +70,7 @@ def car_parked_event(new_car, car_parked, remain_car_parking_space):
     return car_parked, remain_car_parking_space, car_cannot_park
 
 # vehicle leave the parking lot events
-def bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_bicycle_parking_space):
+def bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space):
     bicycle_left_failed = 0
     if new_bicycle == 0:
         return bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed
@@ -82,22 +82,21 @@ def bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_moto
     space = int(new_bicycle / 2)
     new_bicycle = new_bicycle % 2
 
-    if space + remain_motorcycle_parking_space <= max_bicycle_parking_space:
+    if space + remain_motorcycle_parking_space <= max_motorcycle_parking_space:
         remain_motorcycle_parking_space += space
         bicycle_parked -= space
     else:
-        bicycle_left_failed += (space + remain_motorcycle_parking_space - max_bicycle_parking_space)
-        remain_motorcycle_parking_space = max_bicycle_parking_space
+        bicycle_left_failed += (space + remain_motorcycle_parking_space - max_motorcycle_parking_space)
+        remain_motorcycle_parking_space = max_motorcycle_parking_space
         bicycle_parked = 0
 
     if new_bicycle == 1:
         if bicycle_parked % 2 == 1:
             bicycle_parked -= 1
-        elif remain_motorcycle_parking_space > 0:
-            bicycle_parked += 1
-            remain_motorcycle_parking_space -= 1
-        elif remain_motorcycle_parking_space <= 0:
-            bicycle_cannot_park += 1
+        elif remain_motorcycle_parking_space <= max_motorcycle_parking_space:
+            bicycle_parked -= 1
+        elif bicycle_parked % 2 == 0:
+            bicycle_left_failed += 1
         
     #new_bicycle = 0
     return bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed
