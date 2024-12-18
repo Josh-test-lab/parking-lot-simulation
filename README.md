@@ -1,5 +1,5 @@
-# parking-lot-simulation
-Final project for class of simulation study, NDHU, R.O.C. (Taiwan) at fall 2024.
+# Parking Lot Simulation
+## Final project for class of simulation study, NDHU, R.O.C. (Taiwan) at fall 2024.
 
 - Title:          Parking model for the parking lot in Zhixue station
 - Author:         Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee
@@ -13,19 +13,19 @@ Final project for class of simulation study, NDHU, R.O.C. (Taiwan) at fall 2024.
 - Presentation:   https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7
 
 --------------------------------------------------------------------------------------
-The Python files:
+## The Python files:
 1. main_program.py >> the main program (simulation) project by Python, last editor is Hsu.
 2. event.py        >> the event of the simulation by Python, last editor is Hsu.
 
 --------------------------------------------------------------------------------------
-The datasets:
+## The datasets:
 1. Google forms                 >> https://forms.gle/pb4kDFdQ7t1DetKK8
 2. 觀察紀錄簿.xlsx               >> A data set manually recorded during the interview, including the complete number of people entering and exiting the station and the status of the parking lot.
 4. 人流樣態表單 (1131204早).xlsx >> Questionnaire data of 2024.12.04 morning.
 5. 人流樣態表單 (1131204晚).xlsx >> Questionnaire data of 2024.12.04 afternoon.
 
 --------------------------------------------------------------------------------------
-Reference:
+## Reference:
 1. Class of Simulation Study by C. Wang at 2024 fall
 2. https://news.ltn.com.tw/news/life/breakingnews/2555469
 3. https://www.railway.gov.tw/tra-tip-web/tip/file/bc00c5d2-2184-4dbd-bbc4-530a9a3fb83a
@@ -40,7 +40,7 @@ Reference:
 12. https://web.mit.edu/urban_or_book/www/book/chapter5/contents5.html
 
 --------------------------------------------------------------------------------------
-Version history:
+## Version history:
 - 1131218:
 1. Complete all departure events.
 2. 'README.md' file update.
@@ -57,7 +57,7 @@ Version history:
 3. Complete the parking events.
 
 --------------------------------------------------------------------------------------
-Future plan:
+## Future plan:
 - (please delete the one which had complete)
 1. 系統建置。
 2. 整理 Reference ，並將其整理成 APA 格式。
