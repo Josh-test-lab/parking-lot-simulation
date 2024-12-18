@@ -2,7 +2,6 @@
 ## Final project for class of simulation study, NDHU, R.O.C. (Taiwan) at fall 2024
 
 | **Title**:           | Parking model for the parking lot in Zhixue station           |
-|-----------------|-----------------------------------------------------------|
 | **Author**:          | Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee                     |
 | **Version**:         | 20241218                                                      |
 | **Reference**:       | Please view the complete reference below                      |
