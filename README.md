@@ -43,17 +43,17 @@
 
 --------------------------------------------------------------------------------------
 ## Version history
-- 1131218:
+- 1131218
 1. Complete all departure events.
 2. 'README.md' file update.
 3. Data sorting and uploading.
 4. Try to convert initial values into a json or yaml file. 
 
-- 1131217:
+- 1131217
 1. Parking events bug fixed.
 2. Plan to leave events.
 
-- 1131216:
+- 1131216
 1. Start the project.
 2. build 'main_program.py', 'event', 'README.md' files.
 3. Complete the parking events.
