@@ -43,7 +43,7 @@ Reference:
 Version history:
 1131218:
 1. Complete all departure events.
-2. 'Readme.md' file update.
+2. 'README.md' file update.
 3. Data sorting and uploading.
 4. Try to convert initial values into a json or yaml file. 
 
@@ -53,7 +53,7 @@ Version history:
 
 1131216:
 1. Start the project.
-2. build 'main_program.py', 'event', 'Readme.md' files.
+2. build 'main_program.py', 'event', 'README.md' files.
 3. Complete the parking events.
 
 --------------------------------------------------------------------------------------
