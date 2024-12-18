@@ -25,7 +25,7 @@
 5. 人流樣態表單 (1131204晚).xlsx >> Questionnaire data of 2024.12.04 afternoon.
 
 --------------------------------------------------------------------------------------
-## Reference
+## References
 1. Class of Simulation Study by C. Wang at 2024 fall
 2. https://news.ltn.com.tw/news/life/breakingnews/2555469
 3. https://www.railway.gov.tw/tra-tip-web/tip/file/bc00c5d2-2184-4dbd-bbc4-530a9a3fb83a
@@ -57,7 +57,7 @@
 3. Complete the parking events.
 
 --------------------------------------------------------------------------------------
-## Future plan
+## Future plans
 - (please delete the one which had complete)
 1. 系統建置。
 2. 整理 Reference ，並將其整理成 APA 格式。
