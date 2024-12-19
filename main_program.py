@@ -49,6 +49,7 @@ while t <= max_simulation_time:
 
     # parking events for tourists who will aboard the train
     """
+    index of 'new_vehicles' means
     first index is 0: car, 1: motorcycle, 2: bicycle
     second index is the time (clock) in that day
     third index is 0: enter, 1: leave
@@ -74,6 +75,7 @@ while t <= max_simulation_time:
 
     # leaving events for tourists who will leave the station
     """
+    index of 'new_vehicles' means
     first index is 0: car, 1: motorcycle, 2: bicycle
     second index is the time (clock) in that day
     third index is 0: enter, 1: leave
