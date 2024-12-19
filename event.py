@@ -2,7 +2,7 @@
 Information:
     Title = 'Events for parking model for the parking lot in Zhixue station'
     Author = 'Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee'
-    Version = [1131217, 1131216]
+    Version = [1131219, 1131218, 1131217, 1131216]
     Reference = ['Class of Simulation Study by C. Wang at 2024 fall']
 """
 
