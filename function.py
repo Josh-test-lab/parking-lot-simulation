@@ -1,10 +1,10 @@
-'''
+"""
 Information:
     Title = 'Functions for parking model for the parking lot in Zhixue station'
     Author = 'Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee'
     Version = [1131218]
     Reference = ['Class of Simulation Study by C. Wang at 2024 fall']
-'''
+"""
 
 ### import module
 import json
