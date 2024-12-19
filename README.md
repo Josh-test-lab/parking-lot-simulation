@@ -5,7 +5,7 @@
 |--------------------|---------------------------------------------------------------|
 **Title**            | Parking model for the parking lot in Zhixue station
 **Author**           | Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee
-**Version**          | 1131218
+**Version**          | 1131219
 **Reference**        | Please view the complete reference below
 **Github**           | https://github.com/Josh-test-lab/parking-lot-simulation/
 **Patlat**           | https://padlet.com/hyc0113/padlet-4e8wfbj1inqu66jo
@@ -21,11 +21,14 @@
 
 --------------------------------------------------------------------------------------
 ## The datasets
+- Before collation
 1. Google forms                 >> https://forms.gle/pb4kDFdQ7t1DetKK8
 2. 觀察紀錄簿.xlsx               >> A data set manually recorded during the interview, including the complete number of people entering and exiting the station and the status of the parking lot.
 4. 人流樣態表單 (1131204早).xlsx >> Questionnaire data of 2024.12.04 morning.
 5. 人流樣態表單 (1131204晚).xlsx >> Questionnaire data of 2024.12.04 afternoon.
-6. 
+
+- After collation
+1. 
 
 --------------------------------------------------------------------------------------
 ## References
@@ -45,13 +48,15 @@
 --------------------------------------------------------------------------------------
 ## Version history
 - 1131219
-1. 
+1. Fix problems in 'event.py'.
+2. Improve the code for simulation experiments in 'main_program.py' (except passenger distribution).
+3. Update 'README.md'.
 
 - 1131218
 1. Complete all departure events.
 2. 'README.md' file update.
 3. Data sorting and uploading.
-4. Try to convert initial values into a json or yaml file. 
+4. Try to convert initial values into a json file. 
 
 - 1131217
 1. Parking events bug fixed.
@@ -59,8 +64,9 @@
 
 - 1131216
 1. Start the project.
-2. build 'main_program.py', 'event', 'README.md' files.
-3. Complete the parking events.
+2. Build the repository of [parking-lot-simulation](https://github.com/Josh-test-lab/parking-lot-simulation) in Github.
+3. build 'main_program.py', 'event', 'README.md' files.
+4. Complete the parking events.
 
 --------------------------------------------------------------------------------------
 ## Future plans
