@@ -42,6 +42,7 @@ parked_failed = []
 left_failed = []
 
 ## simulation 
+start_time = time.time()
 while t <= max_simulation_time:
     tourists = generate_new_tourists_for_a_day()
     new_vehicles = generate_new_vehicles_for_a_day(tourists, probability)
@@ -93,3 +94,10 @@ while t <= max_simulation_time:
     else:
         clock += 1
     t += 1
+end_time = time.time()
+
+## output
+print(f'CPU time is {end_time - start_time} seconds.')
+
+
+
