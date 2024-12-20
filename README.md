@@ -1,9 +1,10 @@
 # Parking Lot Simulation
 
-## Final project for class of simulation study, NDHU, R.O.C. (Taiwan) at fall 2024
+## Description
+This simulation is about the parking problem in the parking lot of Zhixue station, and it is also a part of the final project for class of simulation study, NDHU, R.O.C. (Taiwan) at fall 2024. In this parking lot simulation, we want to know whether the current and renovated parking lots at Zhixue Station can solve the problem of insufficient parking spaces, and propose improvement projects based on the results of the simulation experiment. 
 
-| *Info*                  | *Contents*                                                                                                                                  |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| *Info*              | *Contents*                                                                                                                                    |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Title**           | Parking model for the parking lot in Zhixue station                                                                                           |
 | **Author**          | Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee                                                                                                     |
 | **Version**         | 1131220                                                                                                                                       |
