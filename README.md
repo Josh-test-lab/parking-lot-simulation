@@ -15,14 +15,10 @@
 | **Report**          | https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7                                                                                             |
 | **Presentation**    | https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7                                                                                             |
 
----
-
 ## The Python files
 
 1. `main_program.py` >> the main program (simulation) project by Python, last editor is Hsu.
 2. `event.py`        >> the event of the simulation by Python, last editor is Hsu.
-
----
 
 ## The datasets
 
@@ -37,8 +33,6 @@
 
 1. `dataset_sort1.0.xlsx` >> The organized dataset.
 
----
-
 ## References
 
 1. 李婉寧 (2015)。 *路外停車場服務評鑑指標設計之研究：以台北市公有委外平面停車場為例。* 臺灣博碩論文知識加值系統。https://hdl.handle.net/11296/zzqjxr
@@ -51,8 +45,6 @@
 8. 國營臺灣鐵路股份有限公司 (2024)。 *臺鐵全線剩餘票。* 政府資料開放平臺。 https://data.gov.tw/dataset/37933
 9. Chia-Li Wang (2024). *AM 609 Simulation Study.* National Dong Hwa University. https://sys.ndhu.edu.tw/RD/TeacherTreasury/tlist.aspx?tcher=19
 10. Larson , R. C.,\& Odoni, A. R. (1981). *Urban Operation Research.* Massachusetts Institute of Technology. https://web.mit.edu/urban_or_book/www/book/index.html
-
----
 
 ## Version history
 
@@ -86,8 +78,6 @@
 2. Build the repository of [parking-lot-simulation](https://github.com/Josh-test-lab/parking-lot-simulation) in Github.
 3. build `main_program.py`, `event.py`, `README.md` files.
 4. Complete the parking events.
-
----
 
 ## Future plans
 
