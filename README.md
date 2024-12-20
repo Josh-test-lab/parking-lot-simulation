@@ -1,37 +1,44 @@
 # Parking Lot Simulation
+
 ## Final project for class of simulation study, NDHU, R.O.C. (Taiwan) at fall 2024
 
-|*Info*              |*contents*                                                     |
-|--------------------|---------------------------------------------------------------|
-**Title**            | Parking model for the parking lot in Zhixue station
-**Author**           | Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee
-**Version**          | 1131219
-**Reference**        | Please view the complete reference below
-**Github**           | https://github.com/Josh-test-lab/parking-lot-simulation/
-**Patlat**           | https://padlet.com/hyc0113/padlet-4e8wfbj1inqu66jo
-**Google calender**  | https://calendar.google.com/calendar/embed?src=c_7b5c1307c48fd66cdba1307b1c698cf1d1f71d90f64bf6466efbace8e6649e35%40group.calendar.google.com
-**Flowchart**        | https://drive.google.com/file/d/1tww7DYNMsvYH5C0S-FqWZNH1lViOU0wo/view?usp=drive_link
-**Report**           | https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7
-**Presentation**     | https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7
+| *Info*                  | *contents*                                                                                                                                  |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Title**           | Parking model for the parking lot in Zhixue station                                                                                           |
+| **Author**          | Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee                                                                                                     |
+| **Version**         | 1131219                                                                                                                                       |
+| **Reference**       | Please view the complete reference below                                                                                                      |
+| **Github**          | https://github.com/Josh-test-lab/parking-lot-simulation/                                                                                      |
+| **Patlat**          | https://padlet.com/hyc0113/padlet-4e8wfbj1inqu66jo                                                                                            |
+| **Google calender** | https://calendar.google.com/calendar/embed?src=c_7b5c1307c48fd66cdba1307b1c698cf1d1f71d90f64bf6466efbace8e6649e35%40group.calendar.google.com |
+| **Flowchart**       | https://drive.google.com/file/d/1tww7DYNMsvYH5C0S-FqWZNH1lViOU0wo/view?usp=drive_link                                                         |
+| **Report**          | https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7                                                                                             |
+| **Presentation**    | https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7                                                                                             |
 
---------------------------------------------------------------------------------------
+---
+
 ## The Python files
+
 1. main_program.py >> the main program (simulation) project by Python, last editor is Hsu.
 2. event.py        >> the event of the simulation by Python, last editor is Hsu.
 
---------------------------------------------------------------------------------------
+---
+
 ## The datasets
+
 - Before collation
+
 1. Google forms                 >> https://forms.gle/pb4kDFdQ7t1DetKK8
 2. 觀察紀錄簿.xlsx               >> A data set manually recorded during the interview, including the complete number of people entering and exiting the station and the status of the parking lot.
-4. 人流樣態表單 (1131204早).xlsx >> Questionnaire data of 2024.12.04 morning.
-5. 人流樣態表單 (1131204晚).xlsx >> Questionnaire data of 2024.12.04 afternoon.
+3. 人流樣態表單 (1131204早).xlsx >> Questionnaire data of 2024.12.04 morning.
+4. 人流樣態表單 (1131204晚).xlsx >> Questionnaire data of 2024.12.04 afternoon.
 
 - After collation
-1. 
 
---------------------------------------------------------------------------------------
+---
+
 ## References
+
 1. Class of Simulation Study by C. Wang at 2024 fall
 2. https://news.ltn.com.tw/news/life/breakingnews/2555469
 3. https://www.railway.gov.tw/tra-tip-web/tip/file/bc00c5d2-2184-4dbd-bbc4-530a9a3fb83a
@@ -44,36 +51,48 @@
 10. https://support.google.com/a/answer/1626902?hl=zh-Hant
 11. http://ir.lib.scu.edu.tw:8080/bitstream/987654321/11367/1/103SCU00121073-001.pdf#page=22.41
 12. https://web.mit.edu/urban_or_book/www/book/chapter5/contents5.html
+13. https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=K0040034&flno=6
 
---------------------------------------------------------------------------------------
+---
+
 ## Version history
+
 - 1131219
+
 1. Fix problems in 'event.py'.
 2. Improve the code for simulation experiments in 'main_program.py' (except passenger distribution).
 3. Update 'README.md'.
 
 - 1131218
+
 1. Complete all departure events.
 2. 'README.md' file update.
 3. Data sorting and uploading.
-4. Try to convert initial values into a json file. 
+4. Try to convert initial values into a json file.
 
 - 1131217
+
 1. Parking events bug fixed.
 2. Plan to leave events.
 
 - 1131216
+
 1. Start the project.
 2. Build the repository of [parking-lot-simulation](https://github.com/Josh-test-lab/parking-lot-simulation) in Github.
 3. build 'main_program.py', 'event', 'README.md' files.
 4. Complete the parking events.
 
---------------------------------------------------------------------------------------
+---
+
 ## Future plans
+
 - (please delete the one which had complete)
-1. 系統建置。
-2. 整理 Reference ，並將其整理成 APA 格式。
-3. 加入各時段進出站人數、及其使用的交通工具比例。(need to build by Sin.)
-4. 主要流程圖、各事件流程圖建立(need to build by Xie and Hsu.)
-5. Meet per week.
-6. Need to construct more plans.
+- [ ] 系統建置。
+
+* [ ] 整理 Reference ，並將其整理成 APA 格式。
+* [ ] 加入各時段進出站人數、及其使用的交通工具比例。(need to build by Sin.)
+
+* [ ] 主要流程圖、各事件流程圖建立(need to build by Xie and Hsu.)
+* [ ] Meet per week.
+
+* [ ] Need to construct more plans.
