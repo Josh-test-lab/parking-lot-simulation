@@ -56,6 +56,8 @@
 ---
 
 ## Version history
+- 1131220
+1. 
 
 - 1131219
 
@@ -86,13 +88,9 @@
 
 ## Future plans
 
-- (please delete the one which had complete)
-- [ ] 系統建置。
-
+* [ ] 系統建置。
 * [ ] 整理 Reference ，並將其整理成 APA 格式。
 * [ ] 加入各時段進出站人數、及其使用的交通工具比例。(need to build by Sin.)
-
 * [ ] 主要流程圖、各事件流程圖建立(need to build by Xie and Hsu.)
 * [ ] Meet per week.
-
 * [ ] Need to construct more plans.
