@@ -39,35 +39,20 @@ def bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain
 
     return bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park
 
-def motorcycle_parked_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space):
-    if new_motorcycle == 0:
-        return motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park
+def vehicle_parked_event(new_vehicle, vehicle_parked, remain_vehicle_parking_space):
+    if new_vehicle == 0:
+        return vehicle_parked, remain_vehicle_parking_space, vehicle_cannot_park
 
-    if new_motorcycle <= remain_motorcycle_parking_space:
-        remain_motorcycle_parking_space -= new_motorcycle
-        motorcycle_parked += new_motorcycle
-        motorcycle_cannot_park = 0
+    if new_vehicle <= remain_vehicle_parking_space:
+        remain_vehicle_parking_space -= new_vehicle
+        vehicle_parked += new_vehicle
+        vehicle_cannot_park = 0
     else:
-        motorcycle_cannot_park = new_motorcycle - remain_motorcycle_parking_space
-        motorcycle_parked += remain_motorcycle_parking_space
-        remain_motorcycle_parking_space = 0
+        vehicle_cannot_park = new_vehicle - remain_vehicle_parking_space
+        vehicle_parked += remain_vehicle_parking_space
+        remain_vehicle_parking_space = 0
 
-    return motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park
-
-def car_parked_event(new_car, car_parked, remain_car_parking_space):
-    if new_car == 0:
-        return car_parked, remain_car_parking_space, car_cannot_park
-
-    if new_car <= remain_car_parking_space:
-        remain_car_parking_space -= new_car
-        car_parked += new_car
-        car_cannot_park = 0
-    else:
-        car_cannot_park = new_car - remain_car_parking_space
-        car_parked += remain_car_parking_space
-        remain_car_parking_space = 0
-
-    return car_parked, remain_car_parking_space, car_cannot_park
+    return vehicle_parked, remain_vehicle_parking_space, vehicle_cannot_park
 
 ## vehicle leave the parking lot events
 def bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space):
@@ -101,41 +86,22 @@ def bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_moto
         
     return bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed
 
-def motorcycle_left_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space):
-    motorcycle_left_failed = 0
-    if new_motorcycle == 0:
-        return motorcycle_parked, remain_motorcycle_parking_space, motorcycle_left_failed
+def vehicle_left_event(new_vehicle, vehicle_parked, remain_vehicle_parking_space, max_vehicle_parking_space):
+    vehicle_left_failed = 0
+    if new_vehicle == 0:
+        return vehicle_parked, remain_vehicle_parking_space, vehicle_left_failed
     
-    if motorcycle_parked < new_motorcycle:
-        motorcycle_left_failed = new_motorcycle - motorcycle_parked
-        new_motorcycle = motorcycle_parked
+    if vehicle_parked < new_vehicle:
+        vehicle_left_failed = new_vehicle - vehicle_parked
+        new_vehicle = vehicle_parked
 
-    if new_motorcycle + remain_motorcycle_parking_space <= max_motorcycle_parking_space:
-        remain_motorcycle_parking_space += new_motorcycle
-        motorcycle_parked -= new_motorcycle
+    if new_vehicle + remain_vehicle_parking_space <= max_vehicle_parking_space:
+        remain_vehicle_parking_space += new_vehicle
+        vehicle_parked -= new_vehicle
     else:
-        motorcycle_left_failed += (new_motorcycle + remain_motorcycle_parking_space - max_motorcycle_parking_space)
-        remain_motorcycle_parking_space = max_motorcycle_parking_space
-        motorcycle_parked = 0
+        vehicle_left_failed += (new_vehicle + remain_vehicle_parking_space - max_vehicle_parking_space)
+        remain_vehicle_parking_space = max_vehicle_parking_space
+        vehicle_parked = 0
         
-    return motorcycle_parked, remain_motorcycle_parking_space, motorcycle_left_failed
-
-def car_left_event(new_car, car_parked, remain_car_parking_space, max_car_parking_space):
-    car_left_failed = 0
-    if new_car == 0:
-        return car_parked, remain_car_parking_space, car_left_failed
-    
-    if car_parked < new_car:
-        car_left_failed = new_car - car_parked
-        new_car = car_parked
-
-    if new_car + remain_car_parking_space <= max_car_parking_space:
-        remain_car_parking_space += new_car
-        car_parked -= new_car
-    else:
-        car_left_failed += (new_car + remain_car_parking_space - max_car_parking_space)
-        remain_car_parking_space = max_car_parking_space
-        car_parked = 0
-        
-    return car_parked, remain_car_parking_space, car_left_failed
+    return vehicle_parked, remain_vehicle_parking_space, vehicle_left_failed
 

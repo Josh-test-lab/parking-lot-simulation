@@ -29,17 +29,18 @@ def load_initial_value():
 
     return max_simulation_time, max_car_parking_space, max_motorcycle_parking_space, car_parked, motorcycle_parked, bicycle_parked
 
-def generate_new_tourists_for_a_day():
+def generate_new_tourists_per_hour():
     """
     generate tourists per hour for enter and leave the station
     """
 
     return tourists
 
-def generate_new_vehicles_for_a_day(tourists, probability):
+def generate_new_vehicles_per_hour(tourists, probability):
     """
     generate new vehicles per hour for enter and leave the parking lot
     """
+
 
     return [new_car, new_motorcycle, new_bicycle]
 
