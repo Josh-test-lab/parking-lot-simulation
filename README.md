@@ -16,12 +16,6 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 | **Report**          | https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7                                                                                             |
 | **Presentation**    | https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7                                                                                             |
 
-## The Python files
-
-1. `main_program.py` >> The main program (simulation) project.
-2. `event.py`        >> The events of the simulation.
-3. `function.py`     >> Functions.
-
 ## The datasets
 
 - Before collation
@@ -34,6 +28,12 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 - After collation
 
 1. `dataset_sort1.0.xlsx` >> The organized dataset.
+
+## The Python files
+
+1. `main_program.py` >> The main program (simulation) project.
+2. `event.py`        >> The events of the simulation.
+3. `function.py`     >> Functions.
 
 ## References
 
