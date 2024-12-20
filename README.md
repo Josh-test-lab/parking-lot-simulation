@@ -18,8 +18,9 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 
 ## The Python files
 
-1. `main_program.py` >> the main program (simulation) project by Python, last editor is Hsu.
-2. `event.py`        >> the event of the simulation by Python, last editor is Hsu.
+1. `main_program.py` >> The main program (simulation) project.
+2. `event.py`        >> The events of the simulation.
+3. `function.py`     >> Functions.
 
 ## The datasets
 
