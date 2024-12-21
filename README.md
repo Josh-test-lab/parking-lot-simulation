@@ -29,7 +29,7 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 - After collation
 
 1. `dataset_sort1.0.xlsx` >> The organized dataset.
-2. `Estimate num_passengers_1221.xlsx` >> The trial estimation for many parameters of target distribution.
+2. `Estimate num_passengers_1221.xlsx` >> The trial estimation for many parameters of target distributions.
 
 ## The Python files
 
