@@ -1,13 +1,14 @@
 # Parking Lot Simulation
 
 ## Description
-This simulation is about the parking problem in the parking lot of Zhixue station, and it is also a part of the final project for class of simulation study, NDHU, R.O.C. (Taiwan) at fall 2024. In this parking lot simulation, we want to know whether the current and renovated parking lots at Zhixue Station can solve the problem of insufficient parking spaces, and propose improvement projects based on the results of the simulation experiment. 
 
-| *Info*              | *Contents*                                                                                                                                    |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+This simulation is about the parking problem in the parking lot of Zhixue station, and it is also a part of the final project for class of simulation study, NDHU, R.O.C. (Taiwan) at fall 2024. In this parking lot simulation, we want to know whether the current and renovated parking lots at Zhixue Station can solve the problem of insufficient parking spaces, and propose improvement projects based on the results of the simulation experiment.
+
+| *Info*                  | *Contents*                                                                                                                                  |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Title**           | Parking model for the parking lot in Zhixue station                                                                                           |
 | **Author**          | Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee                                                                                                     |
-| **Version**         | 1131220                                                                                                                                       |
+| **Version**         | 1131221                                                                                                                                       |
 | **Reference**       | Please view the complete reference below                                                                                                      |
 | **Github**          | https://github.com/Josh-test-lab/parking-lot-simulation/                                                                                      |
 | **Patlat**          | https://padlet.com/hyc0113/padlet-4e8wfbj1inqu66jo                                                                                            |
@@ -28,6 +29,7 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 - After collation
 
 1. `dataset_sort1.0.xlsx` >> The organized dataset.
+2. `Estimate num_passengers_1221.xlsx` >> The trial estimation for many parameters of target distribution.
 
 ## The Python files
 
@@ -50,7 +52,12 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 
 ## Version history
 
-- 1131220
+* 1131221
+
+1. Upload the parameters estimation file.
+2. Update flowcharts.
+
+* 1131220
 
 1. Modify parts of the code in `main_program.py` and `event.py` to simplify the model.
 2. Create a `function.py` file to store functions other than those related to events.
