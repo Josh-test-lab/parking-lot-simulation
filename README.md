@@ -57,6 +57,7 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 1. Modified some names of parameters.
 2. Upload the parameters estimation file `Estimate num_passengers_v1222.xlsx`.
 3. Update `README.md`.
+4. Finish the flowcharts of events.
 
 - 1131221
 
