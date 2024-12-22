@@ -12,7 +12,7 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 | **Reference**       | Please view the complete reference below                                                                                                      |
 | **Github**          | https://github.com/Josh-test-lab/parking-lot-simulation/                                                                                      |
 | **Patlat**          | https://padlet.com/hyc0113/padlet-4e8wfbj1inqu66jo                                                                                            |
-| **Google calender** | https://calendar.google.com/calendar/embed?src=c_7b5c1307c48fd66cdba1307b1c698cf1d1f71d90f64bf6466efbace8e6649e35%40group.calendar.google.com |
+| **Google Calender** | https://calendar.google.com/calendar/embed?src=c_7b5c1307c48fd66cdba1307b1c698cf1d1f71d90f64bf6466efbace8e6649e35%40group.calendar.google.com |
 | **Flowchart**       | https://drive.google.com/file/d/1tww7DYNMsvYH5C0S-FqWZNH1lViOU0wo/view?usp=drive_link                                                         |
 | **Report**          | https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7                                                                                             |
 | **Presentation**    | https://www.overleaf.com/read/nvpjvdwwqrtw#b10bf7                                                                                             |
@@ -52,17 +52,18 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 
 ## Version history
 
-* 1131222
+- 1131222
 
 1. Modified some names of parameters.
 2. Upload the parameters estimation file `Estimate num_passengers_v1222.xlsx`.
+3. Update `README.md`.
 
-* 1131221
+- 1131221
 
 1. Upload the parameters estimation file `Estimate num_passengers_1221.xlsx`.
 2. Update flowcharts.
 
-* 1131220
+- 1131220
 
 1. Modify parts of the code in `main_program.py` and `event.py` to simplify the model.
 2. Create a `function.py` file to store functions other than those related to events.
@@ -93,14 +94,18 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 3. build `main_program.py`, `event.py`, `README.md` files.
 4. Complete the parking events.
 
+- ~ 1131215
+
+1. Data collection (questionnaire survey).
+
 ## Future plans
 
 * [X] Initial system setup. (To be completed by Hsu.)
 * [X] Organize references and format them in APA style. (To be completed by Sin.)
 * [X] Add data on the number of people entering and exiting stations during different time periods and the proportions of transportation modes used. (To be completed by Sin.)
 * [ ] Passenger distribution across different time periods. (To be completed by Xie.)
-* [ ] Create the main flowchart. (To be completed by Xie and Hsu.)
-* [ ] Create flowcharts for individual events. (To be completed by Xie and Hsu.)
+* [X] Create the main flowchart. (To be completed by Xie and Hsu.)
+* [X] Create flowcharts for individual events. (To be completed by Hsu and Sin.)
 * [ ] Identify parameters that may need to be collected for the model.
 * [ ] Optimize and debug the model.
 * [ ] Complete system setup. (To be completed by Hsu, Xie, and Sin.)
