@@ -8,7 +8,7 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Title**           | Parking model for the parking lot in Zhixue station                                                                                           |
 | **Author**          | Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee                                                                                                     |
-| **Version**         | 1131221                                                                                                                                       |
+| **Version**         | 1131222                                                                                                                                       |
 | **Reference**       | Please view the complete reference below                                                                                                      |
 | **Github**          | https://github.com/Josh-test-lab/parking-lot-simulation/                                                                                      |
 | **Patlat**          | https://padlet.com/hyc0113/padlet-4e8wfbj1inqu66jo                                                                                            |
@@ -29,7 +29,7 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 - After collation
 
 1. `dataset_sort1.0.xlsx`               >> The organized dataset.
-2. `Estimate num_passengers_1221.xlsx`  >> The trial estimation for many parameters of target distributions.
+2. `Estimate num_passengers_v1222.xlsx`  >> The trial estimation for many parameters of target distributions.
 
 ## The Python files
 
@@ -51,8 +51,11 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 10. Larson , R. C.,\& Odoni, A. R. (1981). *Urban Operation Research.* Massachusetts Institute of Technology. https://web.mit.edu/urban_or_book/www/book/index.html
 
 ## Version history
+
 * 1131222
+
 1. Modified some names of parameters.
+2. Upload the parameters estimation file `Estimate num_passengers_v1222.xlsx`.
 
 * 1131221
 
