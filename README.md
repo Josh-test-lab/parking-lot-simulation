@@ -47,7 +47,7 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 6. 國營臺灣鐵路股份有限公司 (2024)。 *臺鐵每日各站點進出站人數。* 政府資料開放平臺。 https://data.gov.tw/dataset/8792
 7. 國營臺灣鐵路股份有限公司 (2024)。 *臺鐵每日各站點進出站人數。* 交通部政府資料開放專區。 https://www.motc.gov.tw/201506260001/app/govdata_list/view?module=&id=1615&uid=201705110158
 8. 國營臺灣鐵路股份有限公司 (2024)。 *臺鐵全線剩餘票。* 政府資料開放平臺。 https://data.gov.tw/dataset/37933
-9. A. M. Law, & W. D. Kelton (2007). Simulation Modeling and Analysis (4th ed.). Mcgraw-Hill.
+9. A. M. Law, & W. D. Kelton (2007). *Simulation Modeling and Analysis* (4th ed.). Mcgraw-Hill.
 10. Chia-Li Wang (2024). *AM 609 Simulation Study.* National Dong Hwa University. https://sys.ndhu.edu.tw/RD/TeacherTreasury/tlist.aspx?tcher=19
 11. Larson , R. C.,\& Odoni, A. R. (1981). *Urban Operation Research.* Massachusetts Institute of Technology. https://web.mit.edu/urban_or_book/www/book/index.html
 
