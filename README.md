@@ -21,15 +21,15 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 
 - Before collation
 
-1. Google forms                 >> https://forms.gle/pb4kDFdQ7t1DetKK8
+1. Google forms                    >> https://forms.gle/pb4kDFdQ7t1DetKK8
 2. `觀察紀錄簿.xlsx`               >> A data set manually recorded during the interview, including the complete number of people entering and exiting the station and the status of the parking lot.
 3. `人流樣態表單 (1131204早).xlsx` >> Questionnaire data of 2024.12.04 morning.
 4. `人流樣態表單 (1131204晚).xlsx` >> Questionnaire data of 2024.12.04 afternoon.
 
 - After collation
 
-1. `dataset_sort1.0.xlsx` >> The organized dataset.
-2. `Estimate num_passengers_1221.xlsx` >> The trial estimation for many parameters of target distributions.
+1. `dataset_sort1.0.xlsx`               >> The organized dataset.
+2. `Estimate num_passengers_1221.xlsx`  >> The trial estimation for many parameters of target distributions.
 
 ## The Python files
 
@@ -51,6 +51,8 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 10. Larson , R. C.,\& Odoni, A. R. (1981). *Urban Operation Research.* Massachusetts Institute of Technology. https://web.mit.edu/urban_or_book/www/book/index.html
 
 ## Version history
+* 1131222
+1. Modified some names of parameters.
 
 * 1131221
 
