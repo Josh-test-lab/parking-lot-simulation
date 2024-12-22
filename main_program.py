@@ -1,7 +1,7 @@
 """
 Title: Main program for parking model for the parking lot in Zhixue station
 Author: Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee
-Version: 1131220, 1131219, 1131218, 1131217, 1131216
+Version: 1131222, 1131220, 1131219, 1131218, 1131217, 1131216
 Reference: Class of Simulation Study by C. Wang at 2024 fall
 """
 
@@ -43,10 +43,10 @@ left_failed = []
 ## simulation 
 start_time = time.time()
 while t <= max_simulation_time:
-    tourists = generate_new_tourists_per_hour(tourists_probability)
-    new_vehicles = generate_new_vehicles_per_hour(tourists, vehicle_probability)
+    passengers = generate_new_passengers_per_hour(passengers_probability)
+    new_vehicles = generate_new_vehicles_per_hour(passengers, vehicle_probability)
 
-    # parking events for tourists who will aboard the train
+    # parking events for passengers who will aboard the train
     """
     index of 'new_vehicles' means
     first index is 0: car, 1: motorcycle, 2: bicycle
@@ -72,7 +72,7 @@ while t <= max_simulation_time:
         bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park_counter = bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space)
         bicycle_cannot_park += bicycle_cannot_park_counter
 
-    # leaving events for tourists who will leave the station
+    # leaving events for passengers who will leave the station
     """
     index of 'new_vehicles' means
     first index is 0: car, 1: motorcycle, 2: bicycle

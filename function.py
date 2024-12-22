@@ -1,7 +1,7 @@
 """
 Title: Functions for parking model for the parking lot in Zhixue station
 Author: Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee
-Version: 1131220, 1131218
+Version: 1131222, 1131220, 1131218
 Reference: Class of Simulation Study by C. Wang at 2024 fall
 """
 
@@ -28,14 +28,14 @@ def load_initial_value():
 
     return max_simulation_time, max_car_parking_space, max_motorcycle_parking_space, car_parked, motorcycle_parked, bicycle_parked
 
-def generate_new_tourists_per_hour():
+def generate_new_passengers_per_hour():
     """
-    generate tourists per hour for enter and leave the station
+    generate passengers per hour for enter and leave the station
     """
 
-    return tourists
+    return passengers
 
-def generate_new_vehicles_per_hour(tourists, probability):
+def generate_new_vehicles_per_hour(passengers, probability):
     """
     generate new vehicles per hour for enter and leave the parking lot
     """
