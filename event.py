@@ -58,15 +58,13 @@ def bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain
 
     if new_bicycle % max_bicycle_parked_in_a_motorcycle_space != 0:
         remainder_of_bicycle_in_motorcycle_parking_space = bicycle_parked % max_bicycle_parked_in_a_motorcycle_space
-        if remainder_of_bicycle_in_motorcycle_parking_space == 0:
-            bicycle_parked += new_bicycle
-            remain_motorcycle_parking_space -= 1
-        elif max_bicycle_parked_in_a_motorcycle_space - remainder_of_bicycle_in_motorcycle_parking_space >= new_bicycle:
-            bicycle_parked += new_bicycle
-        elif remain_motorcycle_parking_space > 0:
-            bicycle_parked += new_bicycle
-            remain_motorcycle_parking_space -= 1
-        elif remain_motorcycle_parking_space <= 0:
+        if remain_motorcycle_parking_space > 0:
+            if remainder_of_bicycle_in_motorcycle_parking_space == 0:
+                bicycle_parked += new_bicycle
+                remain_motorcycle_parking_space -= 1
+            elif max_bicycle_parked_in_a_motorcycle_space - remainder_of_bicycle_in_motorcycle_parking_space >= new_bicycle:
+                bicycle_parked += new_bicycle
+        else:
             bicycle_cannot_park += new_bicycle
 
     return bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park
