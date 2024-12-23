@@ -41,6 +41,8 @@ bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park = bicycle_p
 bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park = bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space = 2)
 [bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park]
 
+
+
 # store counters
 parked = []
 parked_failed = []
