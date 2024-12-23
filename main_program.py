@@ -33,7 +33,7 @@ remain_motorcycle_parking_space = max_motorcycle_parking_space - motorcycle_park
 # number of new vehicle enter/leave the parking lot
 new_car = 0
 new_motorcycle = 0
-new_bicycle = 11
+new_bicycle = 7
 
 bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park = bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space = 2)
 [bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park]
