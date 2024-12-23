@@ -33,7 +33,7 @@ remain_motorcycle_parking_space = max_motorcycle_parking_space - motorcycle_park
 # number of new vehicle enter/leave the parking lot
 new_car = 0
 new_motorcycle = 0
-new_bicycle = 3
+new_bicycle = 5
 
 
 

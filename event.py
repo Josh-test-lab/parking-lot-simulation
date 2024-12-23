@@ -152,7 +152,7 @@ def bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_moto
         if remainder_of_bicycle_in_motorcycle_parking_space == 0:
             if remain_motorcycle_parking_space <= max_motorcycle_parking_space:
                 bicycle_parked -= new_bicycle
-                remain_motorcycle_parking_space += 1
+                # remain_motorcycle_parking_space += 1
             else:
                 bicycle_left_failed += new_bicycle
         else:
