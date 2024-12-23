@@ -56,16 +56,25 @@ def bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain
         bicycle_parked += (max_bicycle_parked_in_a_motorcycle_space * remain_motorcycle_parking_space)
         remain_motorcycle_parking_space = 0
 
-    if new_bicycle % max_bicycle_parked_in_a_motorcycle_space != 0:
+    if new_bicycle != 0:
         remainder_of_bicycle_in_motorcycle_parking_space = bicycle_parked % max_bicycle_parked_in_a_motorcycle_space
-        if remain_motorcycle_parking_space > 0:
-            if remainder_of_bicycle_in_motorcycle_parking_space == 0:
+        if remainder_of_bicycle_in_motorcycle_parking_space == 0:
+            if remain_motorcycle_parking_space > 0:
                 bicycle_parked += new_bicycle
                 remain_motorcycle_parking_space -= 1
-            elif max_bicycle_parked_in_a_motorcycle_space - remainder_of_bicycle_in_motorcycle_parking_space >= new_bicycle:
-                bicycle_parked += new_bicycle
+            else:
+                bicycle_cannot_park += new_bicycle
         else:
-            bicycle_cannot_park += new_bicycle
+            if max_bicycle_parked_in_a_motorcycle_space - remainder_of_bicycle_in_motorcycle_parking_space >= new_bicycle:
+                bicycle_parked += new_bicycle
+            else:
+                bicycle_parked += (max_bicycle_parked_in_a_motorcycle_space - remainder_of_bicycle_in_motorcycle_parking_space)
+                new_bicycle -= (max_bicycle_parked_in_a_motorcycle_space - remainder_of_bicycle_in_motorcycle_parking_space)
+                if remain_motorcycle_parking_space > 0:
+                    bicycle_parked += new_bicycle
+                    remain_motorcycle_parking_space -= 1
+                else:
+                    bicycle_cannot_park += new_bicycle
 
     return bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park
 
@@ -138,19 +147,25 @@ def bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_moto
         remain_motorcycle_parking_space = max_motorcycle_parking_space
         bicycle_parked = 0
 
-    if new_bicycle % max_bicycle_parked_in_a_motorcycle_space != 0:
+    if new_bicycle != 0:
         remainder_of_bicycle_in_motorcycle_parking_space = bicycle_parked % max_bicycle_parked_in_a_motorcycle_space
-        if remainder_of_bicycle_in_motorcycle_parking_space > new_bicycle:
-            bicycle_parked -= new_bicycle
-        elif remainder_of_bicycle_in_motorcycle_parking_space == new_bicycle:
-            bicycle_parked -= new_bicycle
-            remain_motorcycle_parking_space += 1
-        elif remain_motorcycle_parking_space <= max_motorcycle_parking_space:
-            bicycle_parked -= new_bicycle
-            remain_motorcycle_parking_space += 1
+        if remainder_of_bicycle_in_motorcycle_parking_space == 0:
+            if remain_motorcycle_parking_space <= max_motorcycle_parking_space:
+                bicycle_parked -= new_bicycle
+                remain_motorcycle_parking_space += 1
+            else:
+                bicycle_left_failed += new_bicycle
         else:
-            bicycle_left_failed += new_bicycle - bicycle_parked
-            bicycle_parked = 0
+            if remainder_of_bicycle_in_motorcycle_parking_space > new_bicycle:
+                bicycle_parked -= new_bicycle
+            else:
+                bicycle_parked -= remainder_of_bicycle_in_motorcycle_parking_space
+                new_bicycle -= remainder_of_bicycle_in_motorcycle_parking_space
+                remain_motorcycle_parking_space += 1
+                if remain_motorcycle_parking_space < max_motorcycle_parking_space:
+                    bicycle_parked -= new_bicycle
+                else:
+                    bicycle_left_failed += new_bicycle
         
     return bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed
 
