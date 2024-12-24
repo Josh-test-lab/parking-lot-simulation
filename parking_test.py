@@ -61,11 +61,11 @@ while True:
 
 
     if new_bicycle > 0:
-        bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park = bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space = 2)
+        bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park = bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space)
         print(f'bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park = {[bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park]}')
     else:
         new_bicycle = -new_bicycle
-        bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed = bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space = 2)
+        bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed = bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space)
         print(f'bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed = {[bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed]}')
 
 
