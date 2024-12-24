@@ -8,7 +8,7 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Title**           | Parking model for the parking lot in Zhixue station                                                                                           |
 | **Author**          | Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee                                                                                                     |
-| **Version**         | 1131223                                                                                                                                      |
+| **Version**         | 1131224                                                                                                                                       |
 | **Reference**       | Please view the complete reference below                                                                                                      |
 | **Github**          | https://github.com/Josh-test-lab/parking-lot-simulation/                                                                                      |
 | **Patlat**          | https://padlet.com/hyc0113/padlet-4e8wfbj1inqu66jo                                                                                            |
@@ -34,8 +34,9 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 ## The Python files
 
 1. `main_program.py` >> The main program (simulation) project.
-2. `event.py`        >> The events of the simulation.
-3. `function.py`     >> Functions.
+2. `parking_test.py` >> To test whether all the events in `event.py` executes as expected.
+3. `event.py`        >> The events of the simulation.
+4. `function.py`     >> Functions.
 
 ## References
 
@@ -52,6 +53,11 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 11. R. C. Larson, & A. R. Odoni (1981). *Urban Operation Research.* Massachusetts Institute of Technology. https://web.mit.edu/urban_or_book/www/book/index.html
 
 ## Version history
+
+- 1131224
+
+1. Upload `parking_test.py` for testing all events.
+2. Update `README.md`.
 
 - 1131223
 
