@@ -1,7 +1,7 @@
 """
-Title: Main program for parking model for the parking lot in Zhixue station
-Author: Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee
-Version: 1131222, 1131220, 1131219, 1131218, 1131217, 1131216
+Title: Testing for parking model for the parking lot in Zhixue station
+Author: Hsu, Yao-Chih
+Version: 1131224, 1131223
 Reference: Class of Simulation Study by C. Wang at 2024 fall
 """
 
