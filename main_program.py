@@ -21,6 +21,9 @@ max_simulation_time = 10 * 365 * 24 # total time
 max_car_parking_space = 90
 max_motorcycle_parking_space = 627
 
+# number of max bicycles which parked in one motorcycle space
+max_bicycle_parked_in_a_motorcycle_space = 2
+
 # number of spaces which be parked now
 car_parked = 0
 motorcycle_parked = 0
@@ -69,7 +72,7 @@ while t <= max_simulation_time:
         motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park_counter = vehicle_parked_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space)
         motorcycle_cannot_park += motorcycle_cannot_park_counter
     else:
-        bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park_counter = bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space)
+        bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park_counter = bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space)
         bicycle_cannot_park += bicycle_cannot_park_counter
 
     # leaving events for passengers who will leave the station
@@ -82,7 +85,7 @@ while t <= max_simulation_time:
     new_car, new_motorcycle, new_bicycle = new_vehicles[0][clock][1], new_vehicles[1][clock][1], new_vehicles[2][clock][1]
     car_parked, remain_car_parking_space, car_left_failed = vehicle_left_event(new_car, car_parked, remain_car_parking_space, max_car_parking_space)
     motorcycle_parked, remain_motorcycle_parking_space, motorcycle_left_failed = vehicle_left_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space)
-    bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed = bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space)
+    bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed = bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space)
 
     # store counters
     parked.append([car_parked, motorcycle_parked, bicycle_parked])
