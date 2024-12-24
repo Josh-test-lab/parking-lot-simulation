@@ -10,6 +10,8 @@ import random
 from event import *
 import json
 import time
+import math
+import numpy as np
 
 ### function
 def generate_new_passengers_per_hour(probability_per_hour):
@@ -32,7 +34,7 @@ def generate_new_vehicles_per_hour(passengers, clock, probability_per_hour):
 
 def parking_simulate(path_to_initial_value_json_file):
     ## load 'initial_values.json' file
-    with open('initial_values.json', 'r', encoding = 'utf-8') as file:
+    with open(path_to_initial_value_json_file, 'r', encoding = 'utf-8') as file:
         initial_value = json.load(file)
 
     ## initial values
@@ -43,6 +45,10 @@ def parking_simulate(path_to_initial_value_json_file):
     # number of max parking spaces
     max_car_parking_space = initial_value['parking_spaces']['max_car_parking_space']['value']
     max_motorcycle_parking_space = initial_value['parking_spaces']['max_motorcycle_parking_space']['value']
+    if max_car_parking_space == -1:
+        max_car_parking_space = math.inf
+    if max_motorcycle_parking_space == -1:
+        max_motorcycle_parking_space = math.inf
     
     # number of max bicycles which parked in one motorcycle space
     max_bicycle_parked_in_a_motorcycle_space = initial_value['parking_spaces']['max_bicycle_parked_in_a_motorcycle_space']['value']
@@ -60,6 +66,8 @@ def parking_simulate(path_to_initial_value_json_file):
     parked = []
     parked_failed = []
     left_failed = []
+    passengers_list = []
+    clocks = []
     
     ## simulation 
     start_time = time.time()
@@ -107,6 +115,9 @@ def parking_simulate(path_to_initial_value_json_file):
         parked.append([car_parked, motorcycle_parked, bicycle_parked])
         parked_failed.append([car_cannot_park, motorcycle_cannot_park, bicycle_cannot_park])
         left_failed.append([car_left_failed, motorcycle_left_failed, bicycle_left_failed])
+        # passenger_list: [total, car_in, car_out, motorcycle_in, motorcycle_out, bicycle_in, bicycle_out, walk]
+        passengers_list.append([passengers, new_vehicles[0][0], new_vehicles[0][1], new_vehicles[1][0], new_vehicles[1][1], new_vehicles[2][0], new_vehicles[2][1], int(passengers - np.sum(new_vehicles))])
+        clocks.append([t, clock])
     
         # update time variables
         if clock == 23:
@@ -114,6 +125,10 @@ def parking_simulate(path_to_initial_value_json_file):
         else:
             clock += 1
         t += 1
-    end_time = time.time()
 
-return
+    end_time = time.time()
+    CPU_time = end_time - start_time
+
+    return clocks, passengers_list, parked, parked_failed, left_failed, CPU_time
+
+
