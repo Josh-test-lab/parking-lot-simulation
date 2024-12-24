@@ -8,6 +8,7 @@ Reference: Class of Simulation Study by C. Wang at 2024 fall
 ### import module
 from event import *
 import json
+import math
 
 ### main program
 with open(r'scenario\initial_values_example.json', 'r', encoding = 'utf-8') as file:
