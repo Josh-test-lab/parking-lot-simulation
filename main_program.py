@@ -19,7 +19,7 @@ max_simulation_time = 10 * 365 * 24 # total time
 
 # number of max parking spaces
 max_car_parking_space = 90
-max_motorcycle_parking_space = 627
+max_motorcycle_parking_space = 5
 
 # number of spaces which be parked now
 car_parked = 0
@@ -33,12 +33,28 @@ remain_motorcycle_parking_space = max_motorcycle_parking_space - motorcycle_park
 # number of new vehicle enter/leave the parking lot
 new_car = 0
 new_motorcycle = 0
-new_bicycle = 0
+new_bicycle = 30
 
 # store counters
 parked = []
 parked_failed = []
 left_failed = []
+
+bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed = bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space = 2)
+[bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed]
+
+
+bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed = bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space = 2)
+[bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed]
+
+
+
+
+
+
+
+
+
 
 ## simulation 
 start_time = time.time()
