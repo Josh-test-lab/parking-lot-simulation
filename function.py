@@ -12,14 +12,15 @@ import json
 import time
 
 ### function
-def generate_new_passengers_per_hour():
+def generate_new_passengers_per_hour(probability_per_hour):
     """
     generate passengers per hour for enter and leave the station
     """
 
+
     return passengers
 
-def generate_new_vehicles_per_hour(passengers, clock, probability):
+def generate_new_vehicles_per_hour(passengers, clock, probability_per_hour):
     """
     generate new vehicles per hour for enter and leave the parking lot
     """
