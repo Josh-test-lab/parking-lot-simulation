@@ -7,7 +7,6 @@ Reference: Class of Simulation Study by C. Wang at 2024 fall
 
 ### import module
 from event import *
-from function import *
 
 ### main program
 # number of max parking spaces
@@ -33,26 +32,29 @@ while True:
     [new_car, new_motorcycle, new_bicycle] = [int(new_car), int(new_motorcycle), int(new_bicycle)]
     if new_car > 0:
         car_parked, remain_car_parking_space, car_cannot_park = vehicle_parked_event(new_car, car_parked, remain_car_parking_space)
+        print(f'car_parked, remain_car_parking_space, car_cannot_park = {[car_parked, remain_car_parking_space, car_cannot_park]}')
     else:
         new_car = -new_car
-        car_parked, remain_car_parking_space, car_cannot_park = vehicle_left_event(new_car, car_parked, remain_car_parking_space, max_car_parking_space)
-    print(f'car_parked, remain_car_parking_space, car_cannot_park = {[car_parked, remain_car_parking_space, car_cannot_park]}')
+        car_parked, remain_car_parking_space, car_left_failed = vehicle_left_event(new_car, car_parked, remain_car_parking_space, max_car_parking_space)
+        print(f'car_parked, remain_car_parking_space, car_left_failed = {[car_parked, remain_car_parking_space, car_left_failed]}')
 
 
     if new_motorcycle > 0:
         motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park = vehicle_parked_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space)
+        print(f'motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park = {[motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park]}')
     else:
         new_motorcycle = -new_motorcycle
-        motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park = vehicle_left_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space)
-    print(f'motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park = {[motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park]}')
+        motorcycle_parked, remain_motorcycle_parking_space, motorcycle_left_failed = vehicle_left_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space)
+        print(f'motorcycle_parked, remain_motorcycle_parking_space, motorcycle_left_failed = {[motorcycle_parked, remain_motorcycle_parking_space, motorcycle_left_failed]}')
 
 
     if new_bicycle > 0:
-        bicycle_parked, remain_bicycle_parking_space, bicycle_cannot_park = bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space = 2)
+        bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park = bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space = 2)
+        print(f'bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park = {[bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park]}')
     else:
         new_bicycle = -new_bicycle
-        bicycle_parked, remain_bicycle_parking_space, bicycle_cannot_park = bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space = 2)
-    print(f'bicycle_parked, remain_bicycle_parking_space, bicycle_cannot_park = {[bicycle_parked, remain_bicycle_parking_space, bicycle_cannot_park]}')
+        bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed = bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space = 2)
+        print(f'bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed = {[bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed]}')
 
 
 
