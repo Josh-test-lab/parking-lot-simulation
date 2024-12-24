@@ -28,8 +28,8 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 
 - After collation
 
-1. `dataset_sort1.0.xlsx`               >> The organized dataset.
-2. `Estimate num_passengers_v1222.xlsx`  >> The trial estimation for many parameters of target distributions.
+1. `dataset_sort1.0.xlsx`                >> The organized dataset.
+2. `Estimate num_passengers_v1224.xlsx`  >> The trial estimation for many parameters of target distributions.
 
 ## The Python files
 
@@ -37,6 +37,12 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 2. `parking_test.py` >> To test whether all the events in `event.py` executes as expected.
 3. `event.py`        >> The events of the simulation.
 4. `function.py`     >> Functions.
+
+## The Scenarios
+
+1. Scenarios 1 >> Unlimited Parking Spaces.
+2. Scenarios 2 >> Current Parking Lot Configuration.
+3. Scenarios 3 >> Post-Renovation Parking Lot.
 
 ## References
 
@@ -58,6 +64,12 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 
 1. Upload `parking_test.py` for testing all events.
 2. Update `README.md`.
+3. Update `initial_value_example.json` and upload more initial values for each scenario.
+4. Update `Estimate num_passengers_v1224.xlsx`.
+5. Update flowcharts.
+6. Update ``bicycle_parked_in_motorcycle_space_event`` and ``bicycle_left_motorcycle_space_event`` in `event.py`.
+7. Update `main_program.py`.
+8. Add the function ```parking_simulate``` in `function.py` to simulate of different scenarios, which is built from `main_program.py`.
 
 - 1131223
 
