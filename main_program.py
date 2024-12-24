@@ -16,7 +16,7 @@ from function import *
 ### main program
 ## initial values
 t = 0 # simulation clock
-clock = 0 # clock in a day
+clock = 0 # initial clock for a day
 max_simulation_time = 10 * 365 * 24 # total time
 
 # number of max parking spaces
