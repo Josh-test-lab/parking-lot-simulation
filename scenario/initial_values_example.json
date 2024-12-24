@@ -16,7 +16,7 @@
         }
         ,
         "max_bicycle_parked_in_a_motorcycle_space": {
-            "value": 3,
+            "value": 2,
             "comment": "maximum bicycles parked in one motorcycle space"
         }
     },
