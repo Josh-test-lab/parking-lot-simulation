@@ -33,7 +33,7 @@ bicycle_parked = 0
 
 # number of spaces which can be parked
 remain_car_parking_space = max_car_parking_space - car_parked
-remain_motorcycle_parking_space = max_motorcycle_parking_space - motorcycle_parked - int(bicycle_parked / 2) - (bicycle_parked % 2)
+remain_motorcycle_parking_space = max_motorcycle_parking_space - motorcycle_parked - int(bicycle_parked / max_bicycle_parked_in_a_motorcycle_space) - (1 if bicycle_parked % max_bicycle_parked_in_a_motorcycle_space != 0 else 0)
 
 # number of new vehicle enter/leave the parking lot
 new_car = 0
