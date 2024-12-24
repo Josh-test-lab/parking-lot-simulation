@@ -7,16 +7,16 @@
     },
     "parking_spaces": {
         "max_car_parking_space": {
-            "value": 90,
+            "value": 5,
             "comment": "maximum car parking spaces, -1 for infinite"
         },
         "max_motorcycle_parking_space": {
-            "value": 627,
+            "value": 6,
             "comment": "maximum motorcycle parking spaces, -1 for infinite"
         }
         ,
         "max_bicycle_parked_in_a_motorcycle_space": {
-            "value": 2,
+            "value": 3,
             "comment": "maximum bicycles parked in one motorcycle space"
         }
     },
