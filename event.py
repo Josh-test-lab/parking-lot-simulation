@@ -59,7 +59,7 @@ def bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain
             bicycle_parked += 1
             bicycle_cannot_park -= 1
 
-    while new_bicycle != 0:
+    while new_bicycle > 0:
         if bicycle_parked % max_bicycle_parked_in_a_motorcycle_space != 0:
             bicycle_parked += 1
         elif remain_motorcycle_parking_space > 0:
@@ -140,7 +140,7 @@ def bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_moto
         remain_motorcycle_parking_space = max_motorcycle_parking_space
         bicycle_parked = 0
 
-    while new_bicycle != 0:
+    while new_bicycle > 0:
         if bicycle_parked % max_bicycle_parked_in_a_motorcycle_space != 0:
             bicycle_parked -= 1
             remain_motorcycle_parking_space += 1
