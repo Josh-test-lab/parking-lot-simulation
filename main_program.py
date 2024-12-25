@@ -19,6 +19,10 @@ t = 0 # simulation clock
 clock = 0 # initial clock for a day
 max_simulation_time = 10 * 365 * 24 # total time
 
+# load 'initial_values.json' file
+path_to_initial_value_json_file = r'scenario\initial_values_example.json'
+initial_value = load_initial_values(path_to_initial_value_json_file)
+
 # number of max parking spaces
 max_car_parking_space = 90
 max_motorcycle_parking_space = 627
@@ -40,31 +44,30 @@ new_car = 0
 new_motorcycle = 0
 new_bicycle = 0
 
+# passenger and vehicle probability per hour
+passenger_probability_per_hour = initial_value['passenger_probability_per_hour']
+vehicle_probability_per_hour = initial_value['vehicle_probability_per_hour']
+
 # store counters
 parked = []
 parked_failed = []
 left_failed = []
-
-# probability of passengers
-probability_per_hour = [
-# hour 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 
-      # standard deviation
-]
+passengers_list = []
+clocks = []
 
 ## simulation 
 start_time = time.time()
 while t <= max_simulation_time:
-    passengers = generate_new_passengers_per_hour(passengers_probability)
-    new_vehicles = generate_new_vehicles_per_hour(passengers, vehicle_probability)
+    passengers = generate_new_passengers_per_hour(passenger_probability_per_hour, clock)
+    new_vehicles = generate_new_vehicles_per_hour(vehicle_probability_per_hour, clock, passengers)
 
     # parking events for passengers who will aboard the train
     """
     index of 'new_vehicles' means
     first index is 0: car, 1: motorcycle, 2: bicycle
-    second index is the time (clock) in that day
     third index is 0: enter, 1: leave
     """
-    new_car, new_motorcycle, new_bicycle = new_vehicles[0][clock][0], new_vehicles[1][clock][0], new_vehicles[2][clock][0]
+    new_car, new_motorcycle, new_bicycle = new_vehicles[0][0], new_vehicles[1][0], new_vehicles[2][0]
     car_parked, remain_car_parking_space, car_cannot_park = vehicle_parked_event(new_car, car_parked, remain_car_parking_space)
     motorcycle_cannot_park, bicycle_cannot_park = 0, 0
     while new_motorcycle != 0 and new_bicycle != 0:
@@ -87,10 +90,9 @@ while t <= max_simulation_time:
     """
     index of 'new_vehicles' means
     first index is 0: car, 1: motorcycle, 2: bicycle
-    second index is the time (clock) in that day
     third index is 0: enter, 1: leave
     """
-    new_car, new_motorcycle, new_bicycle = new_vehicles[0][clock][1], new_vehicles[1][clock][1], new_vehicles[2][clock][1]
+    new_car, new_motorcycle, new_bicycle = new_vehicles[0][1], new_vehicles[1][1], new_vehicles[2][1]
     car_parked, remain_car_parking_space, car_left_failed = vehicle_left_event(new_car, car_parked, remain_car_parking_space, max_car_parking_space)
     motorcycle_parked, remain_motorcycle_parking_space, motorcycle_left_failed = vehicle_left_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space)
     bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed = bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space)
@@ -99,6 +101,9 @@ while t <= max_simulation_time:
     parked.append([car_parked, motorcycle_parked, bicycle_parked])
     parked_failed.append([car_cannot_park, motorcycle_cannot_park, bicycle_cannot_park])
     left_failed.append([car_left_failed, motorcycle_left_failed, bicycle_left_failed])
+    # passenger_list: [passenger_enter, passenger_leave, car_in, car_out, motorcycle_in, motorcycle_out, bicycle_in, bicycle_out, walk]
+    passengers_list.append([passengers[0], passengers[1], new_vehicles[0][0], new_vehicles[0][1], new_vehicles[1][0], new_vehicles[1][1], new_vehicles[2][0], new_vehicles[2][1], int(np.sum(passengers) - np.sum(new_vehicles))])
+    clocks.append([t, clock])
 
     # update time variables
     if clock == 23:
@@ -106,8 +111,10 @@ while t <= max_simulation_time:
     else:
         clock += 1
     t += 1
-end_time = time.time()
 
+end_time = time.time()
+CPU_time = end_time - start_time
+    
 ## output
 print(f'CPU time is {end_time - start_time} seconds.')
 

@@ -30,7 +30,10 @@ def generate_new_passengers_per_hour(passenger_probability_per_hour, clock):
     """
     mean = passenger_probability_per_hour['mean']['value'][clock]
     std = passenger_probability_per_hour['std']['value'][clock]
-    passengers = int(abs(np.random.normal(loc = mean, scale = std)))
+    passenger_enter_rate = passenger_probability_per_hour['passenger_enter_rate']['value'][clock]
+    population = int(abs(np.random.normal(loc = mean, scale = std)))
+    # [passenger_enter, passenger_leave]
+    passengers = [int(population * passenger_enter_rate), int(population * (1 - passenger_enter_rate))]
 
     return passengers
 
@@ -38,10 +41,16 @@ def generate_new_vehicles_per_hour(vehicle_probability_per_hour, clock, passenge
     """
     generate new vehicles per hour for enter and leave the parking lot
     """
+    car_park_probability = vehicle_probability_per_hour['car']['park'][clock]
+    car_leave_probability = vehicle_probability_per_hour['car']['leave'][clock]
+    motorcycle_park_probability = vehicle_probability_per_hour['motorcycle']['park'][clock]
+    motorcycle_leave_probability = vehicle_probability_per_hour['motorcycle']['leave'][clock]
+    bicycle_park_probability = vehicle_probability_per_hour['bicycle']['park'][clock]
+    bicycle_leave_probability = vehicle_probability_per_hour['bicycle']['leave'][clock]
     
-    car = []
-    motorcycle = []
-    bicycle = []
+    car = [passengers[0] * car_park_probability, passengers[1] * car_leave_probability]
+    motorcycle = [passengers[0] * motorcycle_park_probability, passengers[1] * motorcycle_leave_probability]
+    bicycle = [passengers[0] * bicycle_park_probability, passengers[1] * bicycle_leave_probability]
 
     return [car, motorcycle, bicycle]
 
@@ -131,8 +140,8 @@ def parking_simulate(path_to_initial_value_json_file):
         parked.append([car_parked, motorcycle_parked, bicycle_parked])
         parked_failed.append([car_cannot_park, motorcycle_cannot_park, bicycle_cannot_park])
         left_failed.append([car_left_failed, motorcycle_left_failed, bicycle_left_failed])
-        # passenger_list: [total, car_in, car_out, motorcycle_in, motorcycle_out, bicycle_in, bicycle_out, walk]
-        passengers_list.append([passengers, new_vehicles[0][0], new_vehicles[0][1], new_vehicles[1][0], new_vehicles[1][1], new_vehicles[2][0], new_vehicles[2][1], int(passengers - np.sum(new_vehicles))])
+        # passenger_list: [passenger_enter, passenger_leave, car_in, car_out, motorcycle_in, motorcycle_out, bicycle_in, bicycle_out, walk]
+        passengers_list.append([passengers[0], passengers[1], new_vehicles[0][0], new_vehicles[0][1], new_vehicles[1][0], new_vehicles[1][1], new_vehicles[2][0], new_vehicles[2][1], int(np.sum(passengers) - np.sum(new_vehicles))])
         clocks.append([t, clock])
     
         # update time variables
