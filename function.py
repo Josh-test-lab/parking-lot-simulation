@@ -12,6 +12,7 @@ import json
 import time
 import math
 import numpy as np
+import pandas as pd
 
 ### function
 def load_initial_values(path_to_initial_value_json_file):
@@ -161,4 +162,42 @@ def parking_simulate(path_to_initial_value_json_file):
 
     return clocks, passengers_list, parked, parked_failed, left_failed, CPU_time
 
+def save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_per_hour, file_name_average_per_hour):
+    initial_value = load_initial_values(path_to_initial_value_json_file)
+    max_simulation_time = initial_value['simulation_time']['max_simulation_time']['value']
+    column_mappings = [
+        {'name': 'clock', 'result_idx': 0, 'sub_idx': 1},
+        {'name': 'passenger_enter', 'result_idx': 1, 'sub_idx': 0},
+        {'name': 'passenger_leave', 'result_idx': 1, 'sub_idx': 1},
+        {'name': 'car_enter', 'result_idx': 1, 'sub_idx': 2},
+        {'name': 'car_leave', 'result_idx': 1, 'sub_idx': 3},
+        {'name': 'motorcycle_enter', 'result_idx': 1, 'sub_idx': 4},
+        {'name': 'motorcycle_leave', 'result_idx': 1, 'sub_idx': 5},
+        {'name': 'bicycle_enter', 'result_idx': 1, 'sub_idx': 6},
+        {'name': 'bicycle_leave', 'result_idx': 1, 'sub_idx': 7},
+        {'name': 'walker', 'result_idx': 1, 'sub_idx': 8},
+        {'name': 'car_parked', 'result_idx': 2, 'sub_idx': 0},
+        {'name': 'motorcycle_parked', 'result_idx': 2, 'sub_idx': 1},
+        {'name': 'bicycle_parked', 'result_idx': 2, 'sub_idx': 2},
+        {'name': 'car_cannot_park', 'result_idx': 3, 'sub_idx': 0},
+        {'name': 'motorcycle_cannot_park', 'result_idx': 3, 'sub_idx': 1},
+        {'name': 'bicycle_cannot_park', 'result_idx': 3, 'sub_idx': 2},
+        {'name': 'car_left_failed', 'result_idx': 4, 'sub_idx': 0},
+        {'name': 'motorcycle_left_failed', 'result_idx': 4, 'sub_idx': 1},
+        {'name': 'bicycle_left_failed', 'result_idx': 4, 'sub_idx': 2}
+    ]
 
+    data_per_hour = pd.DataFrame(index=range(max_simulation_time), columns=[col['name'] for col in column_mappings])
+
+    for col in column_mappings:
+        data_per_hour[col['name']] = [result[col['result_idx']][hour][col['sub_idx']] for hour in range(max_simulation_time)]
+    data_per_hour['CPU_time'] = [result[5]] + [None] * (len(data_per_hour) - 1)
+    data_per_hour.to_csv(file_name_data_per_hour, index = False)
+    print(f'Date frame `data_per_hour` has been saved to "{file_name_data_per_hour}".')
+
+    average_per_hour = data_per_hour.groupby('clock').mean().reset_index()
+    average_per_hour['CPU_time'] = [result[5]] + [None] * (len(average_per_hour) - 1)
+    average_per_hour.to_csv(file_name_average_per_hour, index = False)
+    print(f'Date frame `average_per_hour` has been saved to "{file_name_average_per_hour}".')
+
+    return data_per_hour, average_per_hour
