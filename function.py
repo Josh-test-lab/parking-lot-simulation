@@ -31,7 +31,7 @@ def generate_new_passengers_per_hour(passenger_probability_per_hour, clock):
     mean = passenger_probability_per_hour['mean']['value'][clock]
     std = passenger_probability_per_hour['std']['value'][clock]
     passenger_enter_rate = passenger_probability_per_hour['passenger_enter_rate']['value'][clock]
-    population = int(abs(np.random.normal(loc = mean, scale = std)))
+    population = int(round(abs(np.random.normal(loc = mean, scale = std)), 0))
     # [passenger_enter, passenger_leave]
     passengers = [int(population * passenger_enter_rate), int(population * (1 - passenger_enter_rate))]
 
@@ -48,9 +48,9 @@ def generate_new_vehicles_per_hour(vehicle_probability_per_hour, clock, passenge
     bicycle_park_probability = vehicle_probability_per_hour['bicycle']['park'][clock]
     bicycle_leave_probability = vehicle_probability_per_hour['bicycle']['leave'][clock]
     
-    car = [int(passengers[0] * car_park_probability), int(passengers[1] * car_leave_probability)]
-    motorcycle = [int(passengers[0] * motorcycle_park_probability), int(passengers[1] * motorcycle_leave_probability)]
-    bicycle = [int(passengers[0] * bicycle_park_probability), int(passengers[1] * bicycle_leave_probability)]
+    car = [int(round(passengers[0] * car_park_probability), 0), int(round(passengers[1] * car_leave_probability), 0)]
+    motorcycle = [int(round(passengers[0] * motorcycle_park_probability), 0), int(round(passengers[1] * motorcycle_leave_probability), 0)]
+    bicycle = [int(round(passengers[0] * bicycle_park_probability), 0), int(round(passengers[1] * bicycle_leave_probability), 0)]
 
     return [car, motorcycle, bicycle]
 
@@ -96,7 +96,7 @@ def parking_simulate(path_to_initial_value_json_file):
     
     ## simulation 
     start_time = time.time()
-    while t <= max_simulation_time:
+    while t < max_simulation_time:
         # generate passengers and vehicles
         passengers = generate_new_passengers_per_hour(passenger_probability_per_hour, clock)
         new_vehicles = generate_new_vehicles_per_hour(vehicle_probability_per_hour, clock, passengers)
@@ -112,7 +112,7 @@ def parking_simulate(path_to_initial_value_json_file):
         motorcycle_cannot_park, bicycle_cannot_park = 0, 0
 
         # debug
-        print(f't = {t}, clock = {clock}, new_car: {new_car}, new_motorcycle: {new_motorcycle}, new_bicycle: {new_bicycle}, walker: {int(np.sum(passengers) - np.sum(new_vehicles))}')
+        # print(f't = {t}, clock = {clock}, new_car: {new_car}, new_motorcycle: {new_motorcycle}, new_bicycle: {new_bicycle}, walker: {int(round(np.sum(passengers) - np.sum(new_vehicles), 0))}')
 
         while new_motorcycle >= 0 and new_bicycle >= 0:
             if random.random() < 0.5:
@@ -146,7 +146,7 @@ def parking_simulate(path_to_initial_value_json_file):
         parked_failed.append([car_cannot_park, motorcycle_cannot_park, bicycle_cannot_park])
         left_failed.append([car_left_failed, motorcycle_left_failed, bicycle_left_failed])
         # passenger_list: [passenger_enter, passenger_leave, car_in, car_out, motorcycle_in, motorcycle_out, bicycle_in, bicycle_out, walk]
-        passengers_list.append([passengers[0], passengers[1], new_vehicles[0][0], new_vehicles[0][1], new_vehicles[1][0], new_vehicles[1][1], new_vehicles[2][0], new_vehicles[2][1], int(np.sum(passengers) - np.sum(new_vehicles))])
+        passengers_list.append([passengers[0], passengers[1], new_vehicles[0][0], new_vehicles[0][1], new_vehicles[1][0], new_vehicles[1][1], new_vehicles[2][0], new_vehicles[2][1], int(round(np.sum(passengers) - np.sum(new_vehicles), 0))])
         clocks.append([t, clock])
 
         # update time variables

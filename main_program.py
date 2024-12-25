@@ -99,5 +99,10 @@ plt.tight_layout()
 plt.show()
 
 
-
+b = [[] for _ in range(24)]
+for hour in range(87600):
+    clock_ = result[0][hour][1]
+    b[clock_].append(result[1][hour][0] + result[1][hour][1])
+b = np.mean(b, axis=1)
+b
 
