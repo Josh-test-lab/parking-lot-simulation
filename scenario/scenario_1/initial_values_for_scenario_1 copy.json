@@ -1,0 +1,67 @@
+{
+    "simulation_time": {
+        "max_simulation_time": {
+            "value": 87600,
+            "comment": "max simulation time in hours"
+        }
+    },
+    "parking_spaces": {
+        "max_car_parking_space": {
+            "value": -1,
+            "comment": "maximum car parking spaces, -1 for infinite"
+        },
+        "max_motorcycle_parking_space": {
+            "value": -1,
+            "comment": "maximum motorcycle parking spaces, -1 for infinite"
+        },
+        "max_bicycle_parked_in_a_motorcycle_space": {
+            "value": 2,
+            "comment": "maximum bicycles parked in one motorcycle space"
+        }
+    },
+    "number_of_spaces_parked": {
+        "car_parked": {
+            "value": 0,
+            "comment": "number of cars parked"
+        },
+        "motorcycle_parked": {
+            "value": 0,
+            "comment": "number of motorcycles parked"
+        },
+        "bicycle_parked": {
+            "value": 0,
+            "comment": "number of bicycles parked"
+        }
+    },
+    "passenger_probability_per_hour": {
+        "mean": {
+            "value": [0, 0, 0, 0, 0, 8, 25, 17, 34, 25, 17, 17, 8, 17, 34, 17, 17, 64, 68, 8, 41, 8, 0, 34],
+            "comment": "mean value of passenger probability per hour (in 24h)"
+        },
+        "std": {
+            "value": [0, 0, 0, 0, 0, 2, 6, 4, 8, 6, 4, 4, 2, 4, 8, 4, 4, 6, 8, 2, 8, 2, 0, 8],
+            "comment": "standard deviation of passenger probability per hour (in 24h)"
+        },
+        "passenger_enter_rate": {
+            "value": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.78125, 0.096774194, 0.5, 0.5, 0.5, 0.5, 0.5],
+            "comment": "passenger enter to the station rate per hour (in 24h)(range between 0 and 1)"
+        }
+    },
+    "vehicle_probability_per_hour": {
+        "car": {
+            "park": [0, 0, 0, 0, 0, 0.2, 0.086956522, 0.266666667, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.06, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+            "leave": [0, 0, 0, 0, 0, 0.2, 0.086956522, 0.266666667, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.06, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+            "comment": "probability of car parking and leaving per hour (in 24h)(range between 0 and 1 and sum of car, motorcycle, bicycle parking (leaving) probabilities should less than 1)"
+        },
+        "motorcycle": {
+            "park": [0, 0, 0, 0, 0, 0.3, 0.260869565, 0, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.1, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+            "leave": [0, 0, 0, 0, 0, 0.3, 0.260869565, 0, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.1, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+            "comment": "probability of motorcycle parking and leaving per hour (in 24h)(range between 0 and 1 and sum of car, motorcycle, bicycle parking (leaving) probabilities should less than 1)"
+        },
+        "bicycle": {
+            "park": [0, 0, 0, 0, 0, 0.2, 0.086956522, 0.066666667, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.22, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+            "leave": [0, 0, 0, 0, 0, 0.2, 0.086956522, 0.066666667, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.22, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+            "comment": "probability of bicycle parking and leaving per hour (in 24h)(range between 0 and 1 and sum of car, motorcycle, bicycle parking (leaving) probabilities should less than 1)"
+        }
+    }
+}
