@@ -97,9 +97,6 @@ def parking_simulate(path_to_initial_value_json_file):
     ## simulation 
     start_time = time.time()
     while t <= max_simulation_time:
-        # debug
-        print(f't = {t}, clock = {clock}, new_car: {new_car}, new_motorcycle: {new_motorcycle}, new_bicycle: {new_bicycle}, walker: {int(np.sum(passengers) - np.sum(new_vehicles))}')
-
         # generate passengers and vehicles
         passengers = generate_new_passengers_per_hour(passenger_probability_per_hour, clock)
         new_vehicles = generate_new_vehicles_per_hour(vehicle_probability_per_hour, clock, passengers)
@@ -148,6 +145,9 @@ def parking_simulate(path_to_initial_value_json_file):
         # passenger_list: [passenger_enter, passenger_leave, car_in, car_out, motorcycle_in, motorcycle_out, bicycle_in, bicycle_out, walk]
         passengers_list.append([passengers[0], passengers[1], new_vehicles[0][0], new_vehicles[0][1], new_vehicles[1][0], new_vehicles[1][1], new_vehicles[2][0], new_vehicles[2][1], int(np.sum(passengers) - np.sum(new_vehicles))])
         clocks.append([t, clock])
+
+        # debug
+        print(f't = {t}, clock = {clock}, new_car: {new_car}, new_motorcycle: {new_motorcycle}, new_bicycle: {new_bicycle}, walker: {int(np.sum(passengers) - np.sum(new_vehicles))}')
 
         # update time variables
         if clock == 23:
