@@ -48,9 +48,9 @@ def generate_new_vehicles_per_hour(vehicle_probability_per_hour, clock, passenge
     bicycle_park_probability = vehicle_probability_per_hour['bicycle']['park'][clock]
     bicycle_leave_probability = vehicle_probability_per_hour['bicycle']['leave'][clock]
     
-    car = [passengers[0] * car_park_probability, passengers[1] * car_leave_probability]
-    motorcycle = [passengers[0] * motorcycle_park_probability, passengers[1] * motorcycle_leave_probability]
-    bicycle = [passengers[0] * bicycle_park_probability, passengers[1] * bicycle_leave_probability]
+    car = [int(passengers[0] * car_park_probability), int(passengers[1] * car_leave_probability)]
+    motorcycle = [int(passengers[0] * motorcycle_park_probability), int(passengers[1] * motorcycle_leave_probability)]
+    bicycle = [int(passengers[0] * bicycle_park_probability), int(passengers[1] * bicycle_leave_probability)]
 
     return [car, motorcycle, bicycle]
 
@@ -97,7 +97,10 @@ def parking_simulate(path_to_initial_value_json_file):
     ## simulation 
     start_time = time.time()
     while t <= max_simulation_time:
-        print(f't = {t}, clock = {clock}')
+        # debug
+        print(f't = {t}, clock = {clock}, new_car: {new_car}, new_motorcycle: {new_motorcycle}, new_bicycle: {new_bicycle}, walker: {int(np.sum(passengers) - np.sum(new_vehicles))}')
+
+        # generate passengers and vehicles
         passengers = generate_new_passengers_per_hour(passenger_probability_per_hour, clock)
         new_vehicles = generate_new_vehicles_per_hour(vehicle_probability_per_hour, clock, passengers)
     
@@ -110,13 +113,14 @@ def parking_simulate(path_to_initial_value_json_file):
         new_car, new_motorcycle, new_bicycle = new_vehicles[0][0], new_vehicles[1][0], new_vehicles[2][0]
         car_parked, remain_car_parking_space, car_cannot_park = vehicle_parked_event(new_car, car_parked, remain_car_parking_space)
         motorcycle_cannot_park, bicycle_cannot_park = 0, 0
-        while new_motorcycle != 0 and new_bicycle != 0:
+
+        while new_motorcycle >= 0 and new_bicycle >= 0:
             if random.random() < 0.5:
                 motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park_counter = vehicle_parked_event(1, motorcycle_parked, remain_motorcycle_parking_space)
                 motorcycle_cannot_park += motorcycle_cannot_park_counter
                 new_motorcycle -= 1
             else:
-                bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park_counter = bicycle_parked_in_motorcycle_space_event(1, bicycle_parked, remain_motorcycle_parking_space)
+                bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park_counter = bicycle_parked_in_motorcycle_space_event(1, bicycle_parked, remain_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space)
                 bicycle_cannot_park += bicycle_cannot_park_counter
                 new_bicycle -= 1
         if new_motorcycle != 0:
@@ -125,7 +129,7 @@ def parking_simulate(path_to_initial_value_json_file):
         else:
             bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park_counter = bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space)
             bicycle_cannot_park += bicycle_cannot_park_counter
-    
+
         # leaving events for passengers who will leave the station
         """
         index of 'new_vehicles' means
@@ -136,7 +140,7 @@ def parking_simulate(path_to_initial_value_json_file):
         car_parked, remain_car_parking_space, car_left_failed = vehicle_left_event(new_car, car_parked, remain_car_parking_space, max_car_parking_space)
         motorcycle_parked, remain_motorcycle_parking_space, motorcycle_left_failed = vehicle_left_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space)
         bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed = bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space)
-    
+
         # store counters
         parked.append([car_parked, motorcycle_parked, bicycle_parked])
         parked_failed.append([car_cannot_park, motorcycle_cannot_park, bicycle_cannot_park])
@@ -144,7 +148,7 @@ def parking_simulate(path_to_initial_value_json_file):
         # passenger_list: [passenger_enter, passenger_leave, car_in, car_out, motorcycle_in, motorcycle_out, bicycle_in, bicycle_out, walk]
         passengers_list.append([passengers[0], passengers[1], new_vehicles[0][0], new_vehicles[0][1], new_vehicles[1][0], new_vehicles[1][1], new_vehicles[2][0], new_vehicles[2][1], int(np.sum(passengers) - np.sum(new_vehicles))])
         clocks.append([t, clock])
-    
+
         # update time variables
         if clock == 23:
             clock == 0
