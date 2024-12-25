@@ -97,6 +97,7 @@ def parking_simulate(path_to_initial_value_json_file):
     ## simulation 
     start_time = time.time()
     while t <= max_simulation_time:
+        print(f't = {t}, clock = {clock}')
         passengers = generate_new_passengers_per_hour(passenger_probability_per_hour, clock)
         new_vehicles = generate_new_vehicles_per_hour(vehicle_probability_per_hour, clock, passengers)
     
