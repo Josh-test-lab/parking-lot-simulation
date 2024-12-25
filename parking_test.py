@@ -1,7 +1,7 @@
 """
 Title: Testing for parking model for the parking lot in Zhixue station
 Author: Hsu, Yao-Chih
-Version: 1131224, 1131223
+Version: 1131225, 1131224, 1131223
 Reference: Class of Simulation Study by C. Wang at 2024 fall
 """
 

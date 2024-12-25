@@ -1,7 +1,7 @@
 """
 Title: Functions for parking model for the parking lot in Zhixue station
 Author: Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee
-Version: 1131224, 1131223, 1131222, 1131220, 1131218
+Version: 1131225, 1131224, 1131223, 1131222, 1131220, 1131218
 Reference: Class of Simulation Study by C. Wang at 2024 fall
 """
 

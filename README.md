@@ -8,7 +8,7 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Title**           | Parking model for the parking lot in Zhixue station                                                                                           |
 | **Author**          | Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee                                                                                                     |
-| **Version**         | 1131224                                                                                                                                       |
+| **Version**         | 1131225                                                                                                                                       |
 | **Reference**       | Please view the complete reference below                                                                                                      |
 | **Github**          | https://github.com/Josh-test-lab/parking-lot-simulation/                                                                                      |
 | **Patlat**          | https://padlet.com/hyc0113/padlet-4e8wfbj1inqu66jo                                                                                            |
@@ -60,6 +60,13 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 
 ## Version history
 
+- 1131225
+
+1. Upload `parking_test.py` for some details.
+2. Update `initial_value_example.json` and update more initial values for each scenario for adding more values.
+3. Update `parking_simulate()`, `generate_new_passengers_per_hour()`, `generate_new_vehicles_per_hour()` in `function.py`.
+4. Update `main_program.py`.
+
 - 1131224
 
 1. Upload `parking_test.py` for testing all events.
@@ -67,9 +74,9 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 3. Update `initial_value_example.json` and upload more initial values for each scenario.
 4. Update `Estimate num_passengers_v1224.xlsx`.
 5. Update flowcharts.
-6. Update ``bicycle_parked_in_motorcycle_space_event`` and ``bicycle_left_motorcycle_space_event`` in `event.py`.
+6. Update `bicycle_parked_in_motorcycle_space_event()` and `bicycle_left_motorcycle_space_event()` in `event.py`.
 7. Update `main_program.py`.
-8. Add the function ```parking_simulate``` in `function.py` to simulate of different scenarios, which is built from `main_program.py`.
+8. Add the function `parking_simulate()` in `function.py` to simulate of different scenarios, which is built from `main_program.py`.
 
 - 1131223
 
