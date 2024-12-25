@@ -115,7 +115,7 @@ def parking_simulate(path_to_initial_value_json_file):
         # debug
         # print(f't = {t}, clock = {clock}, new_car: {new_car}, new_motorcycle: {new_motorcycle}, new_bicycle: {new_bicycle}, walker: {int(round(np.sum(passengers) - np.sum(new_vehicles), 0))}')
 
-        while new_motorcycle >= 0 and new_bicycle >= 0:
+        while new_motorcycle > 0 and new_bicycle > 0:
             if random.random() < 0.5:
                 motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park_counter = vehicle_parked_event(1, motorcycle_parked, remain_motorcycle_parking_space)
                 motorcycle_cannot_park += motorcycle_cannot_park_counter
