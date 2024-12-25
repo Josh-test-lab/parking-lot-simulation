@@ -45,6 +45,12 @@ parked = []
 parked_failed = []
 left_failed = []
 
+# probability of passengers
+probability_per_hour = [
+# hour 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 
+      # standard deviation
+]
+
 ## simulation 
 start_time = time.time()
 while t <= max_simulation_time:

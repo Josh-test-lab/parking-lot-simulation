@@ -14,18 +14,31 @@ import math
 import numpy as np
 
 ### function
-def generate_new_passengers_per_hour(probability_per_hour):
+def load_initial_values(path_to_initial_value_json_file):
+    """
+    load 'initial_values.json' file
+    """
+    with open(path_to_initial_value_json_file, 'r', encoding = 'utf-8') as file:
+        initial_value = json.load(file)
+
+    return initial_value
+
+def generate_new_passengers_per_hour(passenger_probability_per_hour, clock):
     """
     generate passengers per hour for enter and leave the station
+    generate by normal distribution, first array is mean, second arrray is standard deviation
     """
-
+    mean = passenger_probability_per_hour['mean']['value'][clock]
+    std = passenger_probability_per_hour['std']['value'][clock]
+    passengers = int(abs(np.random.normal(loc = mean, scale = std)))
 
     return passengers
 
-def generate_new_vehicles_per_hour(passengers, clock, probability_per_hour):
+def generate_new_vehicles_per_hour(vehicle_probability_per_hour, clock, passengers):
     """
     generate new vehicles per hour for enter and leave the parking lot
     """
+    
     car = []
     motorcycle = []
     bicycle = []
@@ -34,8 +47,7 @@ def generate_new_vehicles_per_hour(passengers, clock, probability_per_hour):
 
 def parking_simulate(path_to_initial_value_json_file):
     ## load 'initial_values.json' file
-    with open(path_to_initial_value_json_file, 'r', encoding = 'utf-8') as file:
-        initial_value = json.load(file)
+    initial_value = load_initial_values(path_to_initial_value_json_file)
 
     ## initial values
     t = 0 
@@ -61,7 +73,11 @@ def parking_simulate(path_to_initial_value_json_file):
     # number of spaces which can be parked
     remain_car_parking_space = max_car_parking_space - car_parked
     remain_motorcycle_parking_space = max_motorcycle_parking_space - motorcycle_parked - int(bicycle_parked / max_bicycle_parked_in_a_motorcycle_space) - (1 if bicycle_parked % max_bicycle_parked_in_a_motorcycle_space != 0 else 0)
-     
+    
+    # passenger and vehicle probability per hour
+    passenger_probability_per_hour = initial_value['passenger_probability_per_hour']
+    vehicle_probability_per_hour = initial_value['vehicle_probability_per_hour']
+
     # store counters
     parked = []
     parked_failed = []
@@ -72,8 +88,8 @@ def parking_simulate(path_to_initial_value_json_file):
     ## simulation 
     start_time = time.time()
     while t <= max_simulation_time:
-        passengers = generate_new_passengers_per_hour(passengers_probability)
-        new_vehicles = generate_new_vehicles_per_hour(passengers, clock, vehicle_probability)
+        passengers = generate_new_passengers_per_hour(passenger_probability_per_hour, clock)
+        new_vehicles = generate_new_vehicles_per_hour(vehicle_probability_per_hour, clock, passengers)
     
         # parking events for passengers who will aboard the train
         """

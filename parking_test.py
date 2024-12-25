@@ -57,29 +57,29 @@ while True:
             print(f'\033[31mInvalid input: {e}. Please try again.\033[0m')
     if new_car > 0:
         car_parked, remain_car_parking_space, car_cannot_park = vehicle_parked_event(new_car, car_parked, remain_car_parking_space)
-        print(f'{'car_parked': <{20}}, {'remain_car_parking_space': <{35}}, {'car_cannot_park': <{25}}= {[car_parked, remain_car_parking_space, car_cannot_park]}')
+        print(f'{'car_parked': <{20}}, {'remain_car_parking_space': <{35}}, {'car_cannot_park': <{26}}= {[car_parked, remain_car_parking_space, car_cannot_park]}')
     else:
         new_car = -new_car
         car_parked, remain_car_parking_space, car_left_failed = vehicle_left_event(new_car, car_parked, remain_car_parking_space, max_car_parking_space)
-        print(f'{'car_parked': <{20}}, {'remain_car_parking_space': <{35}}, {'car_left_failed': <{25}} = {[car_parked, remain_car_parking_space, car_left_failed]}')
+        print(f'{'car_parked': <{20}}, {'remain_car_parking_space': <{35}}, {'car_left_failed': <{26}} = {[car_parked, remain_car_parking_space, car_left_failed]}')
 
 
     if new_motorcycle > 0:
         motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park = vehicle_parked_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space)
-        print(f'{'motorcycle_parked': <{20}}, {'remain_motorcycle_parking_space': <{35}}, {'motorcycle_cannot_park': <{25}} = {[motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park]}')
+        print(f'{'motorcycle_parked': <{20}}, {'remain_motorcycle_parking_space': <{35}}, {'motorcycle_cannot_park': <{26}} = {[motorcycle_parked, remain_motorcycle_parking_space, motorcycle_cannot_park]}')
     else:
         new_motorcycle = -new_motorcycle
         motorcycle_parked, remain_motorcycle_parking_space, motorcycle_left_failed = vehicle_left_event(new_motorcycle, motorcycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space)
-        print(f'{'motorcycle_parked': <{20}}, {'remain_motorcycle_parking_space': <{35}}, {'motorcycle_left_failed': <{25}} = {[motorcycle_parked, remain_motorcycle_parking_space, motorcycle_left_failed]}')
+        print(f'{'motorcycle_parked': <{20}}, {'remain_motorcycle_parking_space': <{35}}, {'motorcycle_left_failed': <{26}} = {[motorcycle_parked, remain_motorcycle_parking_space, motorcycle_left_failed]}')
 
 
     if new_bicycle > 0:
         bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park = bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space)
-        print(f'{'bicycle_parked': <{20}}, {'remain_motorcycle_parking_space': <{35}}, {'bicycle_cannot_park': <{25}} = {[bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park]}')
+        print(f'{'bicycle_parked': <{20}}, {'remain_motorcycle_parking_space': <{35}}, {'bicycle_cannot_park': <{26}} = {[bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park]}')
     else:
         new_bicycle = -new_bicycle
         bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed = bicycle_left_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space, max_motorcycle_parking_space, max_bicycle_parked_in_a_motorcycle_space)
-        print(f'{'bicycle_parked': <{20}}, {'remain_motorcycle_parking_space': <{35}}, {'bicycle_left_failed': <{25}} = {[bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed]}')
+        print(f'{'bicycle_parked': <{20}}, {'remain_motorcycle_parking_space': <{35}}, {'bicycle_left_failed': <{26}} = {[bicycle_parked, remain_motorcycle_parking_space, bicycle_left_failed]}')
 
     count += 1
     print(f' ')
