@@ -48,9 +48,9 @@ def generate_new_vehicles_per_hour(vehicle_probability_per_hour, clock, passenge
     bicycle_park_probability = vehicle_probability_per_hour['bicycle']['park'][clock]
     bicycle_leave_probability = vehicle_probability_per_hour['bicycle']['leave'][clock]
     
-    car = [int(round(passengers[0] * car_park_probability), 0), int(round(passengers[1] * car_leave_probability), 0)]
-    motorcycle = [int(round(passengers[0] * motorcycle_park_probability), 0), int(round(passengers[1] * motorcycle_leave_probability), 0)]
-    bicycle = [int(round(passengers[0] * bicycle_park_probability), 0), int(round(passengers[1] * bicycle_leave_probability), 0)]
+    car = [int(round(passengers[0] * car_park_probability, 0)), int(round(passengers[1] * car_leave_probability, 0))]
+    motorcycle = [int(round(passengers[0] * motorcycle_park_probability, 0)), int(round(passengers[1] * motorcycle_leave_probability, 0))]
+    bicycle = [int(round(passengers[0] * bicycle_park_probability, 0)), int(round(passengers[1] * bicycle_leave_probability, 0))]
 
     return [car, motorcycle, bicycle]
 
