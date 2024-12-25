@@ -66,6 +66,7 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 2. Update `initial_value_example.json` and update more initial values for each scenario for adding more values.
 3. Update `parking_simulate()`, `generate_new_passengers_per_hour()`, `generate_new_vehicles_per_hour()` in `function.py`.
 4. Update `main_program.py`.
+5. Add `save_result_to_csv()` function to save the results from data frame to csv files.
 
 - 1131224
 
