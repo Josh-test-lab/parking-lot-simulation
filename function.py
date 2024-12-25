@@ -145,7 +145,7 @@ def parking_simulate(path_to_initial_value_json_file):
         parked.append([car_parked, motorcycle_parked, bicycle_parked])
         parked_failed.append([car_cannot_park, motorcycle_cannot_park, bicycle_cannot_park])
         left_failed.append([car_left_failed, motorcycle_left_failed, bicycle_left_failed])
-        # passenger_list: [passenger_enter, passenger_leave, car_in, car_out, motorcycle_in, motorcycle_out, bicycle_in, bicycle_out, walk]
+        # passenger_list: [passenger_enter, passenger_leave, car_in, car_out, motorcycle_in, motorcycle_out, bicycle_in, bicycle_out, walker]
         passengers_list.append([passengers[0], passengers[1], new_vehicles[0][0], new_vehicles[0][1], new_vehicles[1][0], new_vehicles[1][1], new_vehicles[2][0], new_vehicles[2][1], int(round(np.sum(passengers) - np.sum(new_vehicles), 0))])
         clocks.append([t, clock])
 
