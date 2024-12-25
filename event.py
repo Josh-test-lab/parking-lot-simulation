@@ -72,13 +72,13 @@ def bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain
     return bicycle_parked, remain_motorcycle_parking_space, bicycle_cannot_park
 
 def vehicle_parked_event(new_vehicle, vehicle_parked, remain_vehicle_parking_space):
+    vehicle_cannot_park = 0
     if new_vehicle == 0:
         return vehicle_parked, remain_vehicle_parking_space, vehicle_cannot_park
 
     if new_vehicle <= remain_vehicle_parking_space:
         remain_vehicle_parking_space -= new_vehicle
         vehicle_parked += new_vehicle
-        vehicle_cannot_park = 0
     else:
         vehicle_cannot_park = new_vehicle - remain_vehicle_parking_space
         vehicle_parked += remain_vehicle_parking_space
