@@ -5,10 +5,6 @@ Version: 1131223, 1131219, 1131218, 1131217, 1131216
 Reference: Class of Simulation Study by C. Wang at 2024 fall
 """
 
-### import module
-import random
-import numpy as np
-
 ### function
 ## vehicle enter the parking lot events
 # def bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space):
