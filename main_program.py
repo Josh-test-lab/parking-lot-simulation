@@ -23,6 +23,12 @@ file_name_data_per_hour = r'scenario\scenario_1\data_per_hour\result_fordata_per
 if not os.path.exists('scenario\\scenario_1\\average_per_hour'):
     os.makedirs('scenario\\scenario_1\\average_per_hour')
 file_name_average_per_hour = r'scenario\scenario_1\average_per_hour\result_for_average_per_hour_for_scenario_1.csv'
+if not os.path.exists('scenario\\scenario_1\\data_per_hour'):
+    os.makedirs('scenario\\scenario_1\\data_per_hour')
+file_name_data_per_hour = r'scenario\scenario_1\data_per_hour\result_fordata_per_hour_for_scenario_1.csv'
+if not os.path.exists('scenario\\scenario_1\\average_per_hour'):
+    os.makedirs('scenario\\scenario_1\\average_per_hour')
+file_name_average_per_hour = r'scenario\scenario_1\average_per_hour\result_for_average_per_hour_for_scenario_1.csv'
 
 # simulate the parking lot
 result = parking_simulate(path_to_initial_value_json_file)
@@ -30,6 +36,10 @@ print(f'CPU time is {result[5]} seconds.')
 
 # save the results
 data_per_hour, average_per_hour = save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_per_hour, file_name_average_per_hour)
+
+# store results to pictures
+#save_result_to_picture_per_day(data_per_hour, 'scenario\\scenario_1\\data_per_hour')
+save_result_to_picture_per_day(average_per_hour, 'scenario\\scenario_1\\average_per_hour')
 
 # store results to pictures
 #save_result_to_picture_per_day(data_per_hour, 'scenario\\scenario_1\\data_per_hour')
@@ -55,6 +65,10 @@ print(f'CPU time is {result[5]} seconds.')
 
 # save the results
 data_per_hour, average_per_hour = save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_per_hour, file_name_average_per_hour)
+
+# store results to pictures
+#save_result_to_picture_per_day(data_per_hour, 'scenario\\scenario_2\\data_per_hour')
+save_result_to_picture_per_day(average_per_hour, 'scenario\\scenario_2\\average_per_hour')
 
 # store results to pictures
 #save_result_to_picture_per_day(data_per_hour, 'scenario\\scenario_2\\data_per_hour')
