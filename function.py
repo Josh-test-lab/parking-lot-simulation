@@ -15,6 +15,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+import tqdm
 
 ### function
 def load_initial_values(path_to_initial_value_json_file):
@@ -191,7 +192,7 @@ def save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_p
 
     data_per_hour = pd.DataFrame(index=range(max_simulation_time), columns=[col['name'] for col in column_mappings])
 
-    for col in column_mappings:
+    for col in tqdm.tqdm(column_mappings):
         data_per_hour[col['name']] = [result[col['result_idx']][hour][col['sub_idx']] for hour in range(max_simulation_time)]
     data_per_hour['CPU_time(in second)'] = [result[5]] + [None] * (len(data_per_hour) - 1)
     data_per_hour.to_csv(file_name_data_per_hour, index = False)
@@ -240,7 +241,7 @@ def save_result_to_picture_per_day(dataset, path_to_save_picture):
     for title in titles:
         os.makedirs(os.path.join(path_to_save_picture, title), exist_ok = True)
 
-    for day in range(hour // 24):
+    for day in tqdm.tqdm(range(hour // 24)):
         daily_data = dataset.iloc[day * 24:(day + 1) * 24]
 
         # plot the data
@@ -254,7 +255,7 @@ def save_result_to_picture_per_day(dataset, path_to_save_picture):
             plt.xticks(np.arange(0, 24, 1)) 
             plt.ylabel('Values')
             plt.title(f'Hourly data for {title} in day {'average' if is_average else day + 1}')
-            plt.legend(loc = 'upper right')
+            plt.legend(loc = 'upper left')
             plt.savefig(f'{path_to_save_picture}\\{title}\\{title}_for_day_{'average' if is_average else day + 1}.png', dpi = 300)
             plt.close()
 
