@@ -35,7 +35,7 @@
     },
     "passenger_probability_per_hour": {
         "mean": {
-            "value": [0, 0, 0, 0, 0, 8, 25, 17, 34, 25, 17, 17, 8, 17, 34, 17, 17, 64, 68, 8, 41, 8, 0, 34],
+            "value": [0, 0, 0, 0, 0, 9, 27, 18, 36, 27, 18, 18, 9, 18, 36, 18, 18, 54, 54, 9, 43, 9, 0, 36],
             "comment": "mean value of passenger probability per hour (in 24h)"
         },
         "std": {
