@@ -13,6 +13,8 @@ import time
 import math
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+import os
 
 ### function
 def load_initial_values(path_to_initial_value_json_file):
@@ -191,13 +193,75 @@ def save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_p
 
     for col in column_mappings:
         data_per_hour[col['name']] = [result[col['result_idx']][hour][col['sub_idx']] for hour in range(max_simulation_time)]
-    data_per_hour['CPU_time'] = [result[5]] + [None] * (len(data_per_hour) - 1)
+    data_per_hour['CPU_time(in second)'] = [result[5]] + [None] * (len(data_per_hour) - 1)
     data_per_hour.to_csv(file_name_data_per_hour, index = False)
     print(f'Date frame `data_per_hour` has been saved to "{file_name_data_per_hour}".')
 
     average_per_hour = data_per_hour.groupby('clock').mean().reset_index()
-    average_per_hour['CPU_time'] = [result[5]] + [None] * (len(average_per_hour) - 1)
+    average_per_hour['CPU_time(in second)'] = [result[5]] + [None] * (len(average_per_hour) - 1)
     average_per_hour.to_csv(file_name_average_per_hour, index = False)
     print(f'Date frame `average_per_hour` has been saved to "{file_name_average_per_hour}".')
 
     return data_per_hour, average_per_hour
+
+def save_result_to_picture_per_day(dataset, path_to_save_picture):
+    # define the groups of data to plot
+    groups_to_plot = [
+        ('passenger_enter', 'passenger_leave', 'passenger'),
+        ('car_parked', 'car_enter', 'car_leave', 'car_cannot_park', 'car_left_failed'),
+        ('motorcycle_parked', 'motorcycle_enter', 'motorcycle_leave', 'motorcycle_cannot_park', 'motorcycle_left_failed'),
+        ('bicycle_parked', 'bicycle_enter', 'bicycle_leave', 'bicycle_cannot_park', 'bicycle_left_failed'),
+        ('walker',),
+        ('car_parked', 'motorcycle_parked', 'bicycle_parked'),
+        ('car_enter', 'motorcycle_enter', 'bicycle_enter'),
+        ('car_leave', 'motorcycle_leave', 'bicycle_leave'),
+        ('car_cannot_park', 'motorcycle_cannot_park', 'bicycle_cannot_park'),
+        ('car_left_failed', 'motorcycle_left_failed', 'bicycle_left_failed')
+    ]
+
+    titles = [
+        'passenger',
+        'car',
+        'motorcycle',
+        'bicycle',
+        'walker',
+        'total parked',
+        'total enter',
+        'total leave',
+        'total cannot park',
+        'total left failed'
+    ]
+
+    hour = len(dataset)
+    if hour < 24:
+        raise ValueError('Not enough data to plot. At least 24 hours.')
+    is_average = hour == 24
+
+    for title in titles:
+        os.makedirs(os.path.join(path_to_save_picture, title), exist_ok = True)
+
+    for day in range(hour // 24):
+        daily_data = dataset.iloc[day * 24:(day + 1) * 24]
+
+        # plot the data
+        for group, title in zip(groups_to_plot, titles):
+            plt.figure(figsize = (10, 6))
+            for col in group:
+                y_values = (daily_data['passenger_enter'] + daily_data['passenger_leave'] if col == 'passenger' else daily_data[col])
+                plt.plot(daily_data['clock'], y_values, label = col)
+            
+            plt.xlabel('Hour')
+            plt.xticks(np.arange(0, 24, 1)) 
+            plt.ylabel('Values')
+            plt.title(f'Hourly data for {title} in day {'average' if is_average else day + 1}')
+            plt.legend(loc = 'upper right')
+            plt.savefig(f'{path_to_save_picture}\\{title}\\{title}_for_day_{'average' if is_average else day + 1}.png', dpi = 300)
+            plt.close()
+
+    print(f'All pictures have been saved to "{path_to_save_picture}".')
+
+
+
+
+
+    
