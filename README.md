@@ -8,7 +8,7 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Title**           | Parking model for the parking lot in Zhixue station                                                                                           |
 | **Author**          | Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee                                                                                                     |
-| **Version**         | 1131225                                                                                                                                       |
+| **Version**         | 1131226                                                                                                                                       |
 | **Reference**       | Please view the complete reference below                                                                                                      |
 | **Github**          | https://github.com/Josh-test-lab/parking-lot-simulation/                                                                                      |
 | **Patlat**          | https://padlet.com/hyc0113/padlet-4e8wfbj1inqu66jo                                                                                            |
@@ -59,6 +59,11 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 11. R. C. Larson, & A. R. Odoni (1981). *Urban Operation Research.* Massachusetts Institute of Technology. https://web.mit.edu/urban_or_book/www/book/index.html
 
 ## Version history
+
+- 1131226
+
+1. Make three results to csv files.
+2. Analysis results.
 
 - 1131225
 
