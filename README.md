@@ -8,7 +8,7 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Title**           | Parking model for the parking lot in Zhixue station                                                                                           |
 | **Author**          | Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee                                                                                                     |
-| **Version**         | 1131226                                                                                                                                       |
+| **Version**         | 1131227                                                                                                                                       |
 | **Reference**       | Please view the complete reference below                                                                                                      |
 | **Github**          | https://github.com/Josh-test-lab/parking-lot-simulation/                                                                                      |
 | **Patlat**          | https://padlet.com/hyc0113/padlet-4e8wfbj1inqu66jo                                                                                            |
@@ -63,6 +63,8 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 - 1131227
 
 1. Bug fixed.
+2. Add new features into the picture.
+3. Update all probabilities in `initial_value_example.json` and other files about initial values.
 
 - 1131226
 
