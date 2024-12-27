@@ -39,7 +39,7 @@ bicycle_parked = initial_value['number_of_spaces_parked']['bicycle_parked']['val
 remain_car_parking_space = max_car_parking_space - car_parked
 remain_motorcycle_parking_space = max_motorcycle_parking_space - motorcycle_parked - int(bicycle_parked / max_bicycle_parked_in_a_motorcycle_space) - (1 if bicycle_parked % max_bicycle_parked_in_a_motorcycle_space != 0 else 0)
 
-print(f'\033[33mWelcome to testing the enter and leave events for the parking lot. The config will be put at `scenario\initial_values_example.json`, please enter positive integers to simulate vehicles parking, and negative intergers for vehicles leaving. Separated by spaces when you enter numbers. \033[0m')
+print(f'\033[33mWelcome to testing the enter and leave events for the parking lot. The config will be put at `scenario\\initial_values_example.json`, please enter positive integers to simulate vehicles parking, and negative intergers for vehicles leaving. Separated by spaces when you enter numbers. \033[0m')
 print(f'The current initial value is')
 print(f'max parking space for car, motorcycle is {[max_car_parking_space, max_motorcycle_parking_space]}.')
 print(f'max bicycle parked in a motorcycle space is {[max_bicycle_parked_in_a_motorcycle_space]}.')
