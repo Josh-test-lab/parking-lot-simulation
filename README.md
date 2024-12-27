@@ -60,6 +60,10 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 
 ## Version history
 
+- 1131227
+
+1. Bug fixed.
+
 - 1131226
 
 1. Make three results to csv files.
