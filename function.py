@@ -1,7 +1,7 @@
 """
 Title: Functions for parking model for the parking lot in Zhixue station
 Author: Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee
-Version: 1131225, 1131224, 1131223, 1131222, 1131220, 1131218
+Version: 1131227, 1131226, 1131225, 1131224, 1131223, 1131222, 1131220, 1131218
 Reference: Class of Simulation Study by C. Wang at 2024 fall
 """
 
@@ -14,6 +14,7 @@ import math
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
 import os
 import tqdm
 
@@ -205,7 +206,10 @@ def save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_p
 
     return data_per_hour, average_per_hour
 
-def save_result_to_picture_per_day(dataset, path_to_save_picture):
+def save_result_to_picture_per_day(dataset, path_to_initial_value_json_file, path_to_save_picture):
+    initial_value = load_initial_values(path_to_initial_value_json_file)
+    max_car_parking_space = initial_value['parking_spaces']['max_car_parking_space']['value']
+    max_motorcycle_parking_space = initial_value['parking_spaces']['max_motorcycle_parking_space']['value']
     # define the groups of data to plot
     groups_to_plot = [
         ('passenger_enter', 'passenger_leave', 'passenger'),
@@ -217,7 +221,8 @@ def save_result_to_picture_per_day(dataset, path_to_save_picture):
         ('car_enter', 'motorcycle_enter', 'bicycle_enter'),
         ('car_leave', 'motorcycle_leave', 'bicycle_leave'),
         ('car_cannot_park', 'motorcycle_cannot_park', 'bicycle_cannot_park'),
-        ('car_left_failed', 'motorcycle_left_failed', 'bicycle_left_failed')
+        ('car_left_failed', 'motorcycle_left_failed', 'bicycle_left_failed'),
+        ('motorcycle_and_bicycle', 'motorcycle_parked', 'motorcycle_enter', 'motorcycle_leave', 'bicycle_parked', 'bicycle_enter', 'bicycle_leave')
     ]
 
     titles = [
@@ -230,7 +235,8 @@ def save_result_to_picture_per_day(dataset, path_to_save_picture):
         'total enter',
         'total leave',
         'total cannot park',
-        'total left failed'
+        'total left failed',
+        'motorcycle and bicycle'
     ]
 
     hour = len(dataset)
@@ -241,6 +247,18 @@ def save_result_to_picture_per_day(dataset, path_to_save_picture):
     for title in titles:
         os.makedirs(os.path.join(path_to_save_picture, title), exist_ok = True)
 
+    y_values_map = {
+        'passenger': lambda data: data['passenger_enter'] + data['passenger_leave'],
+        'motorcycle_and_bicycle': lambda data: data['motorcycle_parked'] + data['bicycle_parked']
+    }
+
+    max_space_map = {
+        'car': max_car_parking_space,
+        'bicycle': 2 * max_motorcycle_parking_space,
+        'motorcycle': max_motorcycle_parking_space,
+        'motorcycle and bicycle': 2 * max_motorcycle_parking_space
+    }
+
     for day in tqdm.tqdm(range(hour // 24)):
         daily_data = dataset.iloc[day * 24:(day + 1) * 24]
 
@@ -248,14 +266,23 @@ def save_result_to_picture_per_day(dataset, path_to_save_picture):
         for group, title in zip(groups_to_plot, titles):
             plt.figure(figsize = (10, 6))
             for col in group:
-                y_values = (daily_data['passenger_enter'] + daily_data['passenger_leave'] if col == 'passenger' else daily_data[col])
+                y_values = y_values_map.get(col, lambda data: data[col])(daily_data)
                 plt.plot(daily_data['clock'], y_values, label = col)
-            
+                
             plt.xlabel('Hour')
             plt.xticks(np.arange(0, 24, 1)) 
             plt.ylabel('Values')
             plt.title(f'Hourly data for {title} in day {'average' if is_average else day + 1}')
             plt.legend(loc = 'upper left')
+
+            if title in max_space_map and max_motorcycle_parking_space != -1 and max_motorcycle_parking_space != -1:
+                ax = plt.gca()
+                ax_right = ax.twinx()
+                max_space = max_space_map[title]
+                ax_right.set_ylim(ax.get_ylim())
+                ax_right.yaxis.set_major_formatter(mtick.PercentFormatter(xmax = max_space))
+                ax_right.set_ylabel('Percentage')
+
             plt.savefig(f'{path_to_save_picture}\\{title}\\{title}_for_day_{'average' if is_average else day + 1}.png', dpi = 300)
             plt.close()
 
