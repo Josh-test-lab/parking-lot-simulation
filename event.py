@@ -5,6 +5,9 @@ Version: 1131223, 1131219, 1131218, 1131217, 1131216
 Reference: Class of Simulation Study by C. Wang at 2024 fall
 """
 
+### import module
+import numpy as np
+
 ### function
 ## vehicle enter the parking lot events
 # def bicycle_parked_in_motorcycle_space_event(new_bicycle, bicycle_parked, remain_motorcycle_parking_space):
@@ -168,4 +171,17 @@ def vehicle_left_event(new_vehicle, vehicle_parked, remain_vehicle_parking_space
         vehicle_parked = 0
         
     return vehicle_parked, remain_vehicle_parking_space, vehicle_left_failed
+
+def vehicle_occupied_long_term_event(car_parked, motorcycle_parked, bicycle_parked, number_of_vehicle_occupied_long_term, poisson_dist = False):
+    car_occupied_long_term, motorcycle_occupied_long_term, bicycle_occupied_long_term = number_of_vehicle_occupied_long_term['car']['value'], number_of_vehicle_occupied_long_term['motorcycle']['value'], number_of_vehicle_occupied_long_term['bicycle']['value']
+    
+    if poisson_dist:
+        car_occupied_long_term, motorcycle_occupied_long_term, bicycle_occupied_long_term = np.random.poisson(lam = car_occupied_long_term), np.random.poisson(lam = motorcycle_occupied_long_term), np.random.poisson(lam = bicycle_occupied_long_term)
+    
+    car_occupied_long_term, motorcycle_occupied_long_term, bicycle_occupied_long_term = min(car_occupied_long_term, car_parked), min(motorcycle_occupied_long_term, motorcycle_parked), min(bicycle_occupied_long_term, bicycle_parked)
+
+    return car_occupied_long_term, motorcycle_occupied_long_term, bicycle_occupied_long_term
+
+
+
 
