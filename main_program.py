@@ -28,7 +28,7 @@ file_name_average_per_hour = r'scenario\scenario_1\average_per_hour\result_for_a
 
 # simulate the parking lot
 result = parking_simulate(path_to_initial_value_json_file)
-print(f'CPU time is {result[6]} seconds.')
+print(f'CPU time is {result[7]} seconds.')
 
 # save the results
 data_per_hour, average_per_hour = save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_per_hour, file_name_average_per_hour)
@@ -53,7 +53,7 @@ file_name_average_per_hour = r'scenario\scenario_2\average_per_hour\result_for_a
 
 # simulate the parking lot
 result = parking_simulate(path_to_initial_value_json_file)
-print(f'CPU time is {result[6]} seconds.')
+print(f'CPU time is {result[7]} seconds.')
 
 # save the results
 data_per_hour, average_per_hour = save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_per_hour, file_name_average_per_hour)
@@ -78,7 +78,7 @@ file_name_average_per_hour = r'scenario\scenario_3\average_per_hour\result_for_a
 
 # simulate the parking lot
 result = parking_simulate(path_to_initial_value_json_file)
-print(f'CPU time is {result[6]} seconds.')
+print(f'CPU time is {result[7]} seconds.')
 
 # save the results
 data_per_hour, average_per_hour = save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_per_hour, file_name_average_per_hour)
