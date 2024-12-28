@@ -11,8 +11,10 @@ Note: This is the main code of simulation. For simulation of different scenarios
 from event import *
 from function import *
 import os
+import time
 
 ### main program
+start_time = time.time()
 
 ## scenario 1
 # file path
@@ -33,7 +35,7 @@ data_per_hour, average_per_hour = save_result_to_csv(result, path_to_initial_val
 
 # store results to pictures
 save_result_to_picture_per_day(average_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_1\\average_per_hour')
-save_result_to_picture_per_day(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_1\\data_per_hour')
+#save_result_to_picture_per_day(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_1\\data_per_hour')
 
 
 
@@ -58,7 +60,7 @@ data_per_hour, average_per_hour = save_result_to_csv(result, path_to_initial_val
 
 # store results to pictures
 save_result_to_picture_per_day(average_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_2\\average_per_hour')
-save_result_to_picture_per_day(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_2\\data_per_hour')
+#save_result_to_picture_per_day(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_2\\data_per_hour')
 
 
 
@@ -83,9 +85,10 @@ data_per_hour, average_per_hour = save_result_to_csv(result, path_to_initial_val
 
 # store results to pictures
 save_result_to_picture_per_day(average_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_3\\average_per_hour')
-save_result_to_picture_per_day(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_3\\data_per_hour')
+#save_result_to_picture_per_day(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_3\\data_per_hour')
 
-
+end_time = time.time()
+print(f'Cost {end_time - start_time} seconds.')
 input(f'Press any key to continue...')
 
 

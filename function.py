@@ -214,6 +214,7 @@ def save_result_to_picture_per_day(dataset, path_to_initial_value_json_file, pat
     initial_value = load_initial_values(path_to_initial_value_json_file)
     max_car_parking_space = initial_value['parking_spaces']['max_car_parking_space']['value']
     max_motorcycle_parking_space = initial_value['parking_spaces']['max_motorcycle_parking_space']['value']
+    max_bicycle_parked_in_a_motorcycle_space = initial_value['parking_spaces']['max_bicycle_parked_in_a_motorcycle_space']['value']
     # define the groups of data to plot
     groups_to_plot = [
         ('passenger_enter', 'passenger_leave', 'passenger'),
@@ -253,14 +254,14 @@ def save_result_to_picture_per_day(dataset, path_to_initial_value_json_file, pat
 
     y_values_map = {
         'passenger': lambda data: data['passenger_enter'] + data['passenger_leave'],
-        'motorcycle_and_bicycle': lambda data: data['motorcycle_parked'] + data['bicycle_parked']
+        'motorcycle_and_bicycle': lambda data: max_bicycle_parked_in_a_motorcycle_space * data['motorcycle_parked'] + data['bicycle_parked']
     }
 
     max_space_map = {
         'car': max_car_parking_space,
-        'bicycle': 2 * max_motorcycle_parking_space,
+        'bicycle': max_bicycle_parked_in_a_motorcycle_space * max_motorcycle_parking_space,
         'motorcycle': max_motorcycle_parking_space,
-        'motorcycle and bicycle': 2 * max_motorcycle_parking_space
+        'motorcycle and bicycle': max_bicycle_parked_in_a_motorcycle_space * max_motorcycle_parking_space
     }
 
     threshold_map = {
@@ -294,8 +295,8 @@ def save_result_to_picture_per_day(dataset, path_to_initial_value_json_file, pat
                 plt.plot(daily_data['clock'], y_values, label = col)
                 
             plt.xlabel('Hour')
-            plt.xticks(np.arange(0, 24, 1)) 
-            plt.ylabel('Values')
+            plt.xticks(np.arange(0, 24, 1))
+            plt.ylabel(f'Values ({max_bicycle_parked_in_a_motorcycle_space} * motorcycle & 1 * bicycle)' if title == 'motorcycle and bicycle' else 'Values')
             plt.title(f'Hourly data for {title} in day {'average' if is_average else day + 1}')
             ax = plt.gca()
             ax_right = None
