@@ -68,6 +68,20 @@
             "comment": "probability of bicycle parking and leaving per hour (in 24h)(range between 0 and 1 and sum of car, motorcycle, bicycle parking (leaving) probabilities should less than 1)"
         }
     },
+    "number_of_vehicle_occupied_long_term": {
+        "car": {
+            "value": 8,
+            "comment": "number of long-term occupied vehicles (positive integer)"
+        },
+        "motorcycle": {
+            "value": 50,
+            "comment": "number of long-term occupied vehicles (positive integer)"
+        },
+        "bicycle": {
+            "value": 50,
+            "comment": "number of long-term occupied vehicles (positive integer)"
+        }
+    },
     "parking_space_threshold": {
         "car": {
             "value": 0.8,

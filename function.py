@@ -28,7 +28,7 @@ def load_initial_values(path_to_initial_value_json_file):
 
     return initial_value
 
-def generate_new_passengers_per_hour(passenger_probability_per_hour, clock):
+def generate_new_passengers_per_hour(passenger_probability_per_hour, clock, normal_dist = False):
     """
     generate passengers per hour for enter and leave the station
     generate by normal distribution, first array is mean, second arrray is standard deviation
@@ -36,13 +36,16 @@ def generate_new_passengers_per_hour(passenger_probability_per_hour, clock):
     mean = passenger_probability_per_hour['mean']['value'][clock]
     std = passenger_probability_per_hour['std']['value'][clock]
     passenger_enter_rate = passenger_probability_per_hour['passenger_enter_rate']['value'][clock]
-    population = int(round(abs(np.random.normal(loc = mean, scale = std)), 0))
+    if normal_dist:
+        population = int(round(abs(np.random.normal(loc = mean, scale = std)), 0))
+    else:
+        population = np.random.poisson(lam = mean)
     # [passenger_enter, passenger_leave]
     passengers = [int(population * passenger_enter_rate), int(population * (1 - passenger_enter_rate))]
 
     return passengers
 
-def generate_new_vehicles_per_hour(vehicle_probability_per_hour, clock, passengers):
+def generate_new_vehicles_per_hour(vehicle_probability_per_hour, number_of_vehicle_occupied_long_term, clock, passengers):
     """
     generate new vehicles per hour for enter and leave the parking lot
     """
@@ -52,12 +55,16 @@ def generate_new_vehicles_per_hour(vehicle_probability_per_hour, clock, passenge
     motorcycle_leave_probability = vehicle_probability_per_hour['motorcycle']['leave'][clock]
     bicycle_park_probability = vehicle_probability_per_hour['bicycle']['park'][clock]
     bicycle_leave_probability = vehicle_probability_per_hour['bicycle']['leave'][clock]
-    
-    car = [int(round(passengers[0] * car_park_probability, 0)), int(round(passengers[1] * car_leave_probability, 0))]
-    motorcycle = [int(round(passengers[0] * motorcycle_park_probability, 0)), int(round(passengers[1] * motorcycle_leave_probability, 0))]
-    bicycle = [int(round(passengers[0] * bicycle_park_probability, 0)), int(round(passengers[1] * bicycle_leave_probability, 0))]
 
-    return [car, motorcycle, bicycle]
+    car_occupied_long_time = np.random.poisson(lam = number_of_vehicle_occupied_long_term['car']['value'])
+    motorcycle_occupied_long_time = np.random.poisson(lam = number_of_vehicle_occupied_long_term['motorcycle']['value'])
+    bicycle_occupied_long_time = np.random.poisson(lam = number_of_vehicle_occupied_long_term['bicycle']['value'])
+    
+    car = [int(round(passengers[0] * car_park_probability, 0)) + car_occupied_long_time, int(round(passengers[1] * car_leave_probability, 0))]
+    motorcycle = [int(round(passengers[0] * motorcycle_park_probability, 0)) + motorcycle_occupied_long_time, int(round(passengers[1] * motorcycle_leave_probability, 0))]
+    bicycle = [int(round(passengers[0] * bicycle_park_probability, 0)) + bicycle_occupied_long_time, int(round(passengers[1] * bicycle_leave_probability, 0))]
+
+    return [car, motorcycle, bicycle], [car_occupied_long_time, motorcycle_occupied_long_time, bicycle_occupied_long_time]
 
 def parking_simulate(path_to_initial_value_json_file):
     ## load 'initial_values.json' file
@@ -91,6 +98,7 @@ def parking_simulate(path_to_initial_value_json_file):
     # passenger and vehicle probability per hour
     passenger_probability_per_hour = initial_value['passenger_probability_per_hour']
     vehicle_probability_per_hour = initial_value['vehicle_probability_per_hour']
+    number_of_vehicle_occupied_long_term = initial_value['number_of_vehicle_occupied_long_term']
 
     # store counters
     parked = []
@@ -105,7 +113,7 @@ def parking_simulate(path_to_initial_value_json_file):
     while t < max_simulation_time:
         # generate passengers and vehicles
         passengers = generate_new_passengers_per_hour(passenger_probability_per_hour, clock)
-        new_vehicles = generate_new_vehicles_per_hour(vehicle_probability_per_hour, clock, passengers)
+        new_vehicles, vehicle_occupied_long_term = generate_new_vehicles_per_hour(vehicle_probability_per_hour, number_of_vehicle_occupied_long_term, clock, passengers)
     
         # parking events for passengers who will aboard the train
         """
@@ -166,7 +174,7 @@ def parking_simulate(path_to_initial_value_json_file):
     end_time = time.time()
     CPU_time = end_time - start_time
 
-    return clocks, passengers_list, parked, parked_failed, left_failed, reamin_space, CPU_time
+    return clocks, passengers_list, parked, parked_failed, left_failed, reamin_space, vehicle_occupied_long_term, CPU_time
 
 def save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_per_hour, file_name_average_per_hour):
     initial_value = load_initial_values(path_to_initial_value_json_file)
@@ -192,10 +200,13 @@ def save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_p
         {'name': 'motorcycle_left_failed', 'result_idx': 4, 'sub_idx': 1},
         {'name': 'bicycle_left_failed', 'result_idx': 4, 'sub_idx': 2},
         {'name': 'remain_car_parking_space', 'result_idx': 5, 'sub_idx': 0},
-        {'name': 'remain_motorcycle_parking_space', 'result_idx': 5, 'sub_idx': 1}
+        {'name': 'remain_motorcycle_parking_space', 'result_idx': 5, 'sub_idx': 1},
+        {'name': 'car_occupied_long_term', 'result_idx': 6, 'sub_idx': 0},
+        {'name': 'motorcycle_occupied_long_term', 'result_idx': 6, 'sub_idx': 1},
+        {'name': 'bicycle_occupied_long_term', 'result_idx': 6, 'sub_idx': 2}
     ]
 
-    data_per_hour = pd.DataFrame(index=range(max_simulation_time), columns=[col['name'] for col in column_mappings])
+    data_per_hour = pd.DataFrame(index = range(max_simulation_time), columns = [col['name'] for col in column_mappings])
 
     for col in tqdm.tqdm(column_mappings):
         data_per_hour[col['name']] = [result[col['result_idx']][hour][col['sub_idx']] for hour in range(max_simulation_time)]
@@ -218,9 +229,9 @@ def save_result_to_picture_per_day(dataset, path_to_initial_value_json_file, pat
     # define the groups of data to plot
     groups_to_plot = [
         ('passenger_enter', 'passenger_leave', 'passenger'),
-        ('car_parked', 'car_enter', 'car_leave', 'car_cannot_park', 'car_left_failed'),
-        ('motorcycle_parked', 'motorcycle_enter', 'motorcycle_leave', 'motorcycle_cannot_park', 'motorcycle_left_failed'),
-        ('bicycle_parked', 'bicycle_enter', 'bicycle_leave', 'bicycle_cannot_park', 'bicycle_left_failed'),
+        ('car_parked', 'car_enter', 'car_leave', 'car_cannot_park', 'car_left_failed', 'car_occupied_long_term'),
+        ('motorcycle_parked', 'motorcycle_enter', 'motorcycle_leave', 'motorcycle_cannot_park', 'motorcycle_left_failed', 'motorcycle_occupied_long_term'),
+        ('bicycle_parked', 'bicycle_enter', 'bicycle_leave', 'bicycle_cannot_park', 'bicycle_left_failed', 'bicycle_occupied_long_term'),
         ('walker',),
         ('car_parked', 'motorcycle_parked', 'bicycle_parked'),
         ('car_enter', 'motorcycle_enter', 'bicycle_enter'),
@@ -308,6 +319,7 @@ def save_result_to_picture_per_day(dataset, path_to_initial_value_json_file, pat
                 ax_right.yaxis.set_major_formatter(mtick.PercentFormatter(xmax=max_space))
                 ax_right.set_ylabel('Percentage')
                 ax_right.axhline(y = threshold * max_space, color = 'gray', linestyle = '--', linewidth = 1, label = f'{int(threshold * 100)}% threshold')
+                ax_right.axhline(y = max_space, color = 'red', linestyle = '--', linewidth = 1, label = f'Maximum parking space')
 
             configure_legend(ax, ax_right)
             save_plot(title, day, is_average, path_to_save_picture)
