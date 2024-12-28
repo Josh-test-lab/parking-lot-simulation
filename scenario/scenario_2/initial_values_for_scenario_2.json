@@ -74,11 +74,11 @@
             "comment": "number of long-term occupied vehicles (positive integer)"
         },
         "motorcycle": {
-            "value": 50,
+            "value": 34,
             "comment": "number of long-term occupied vehicles (positive integer)"
         },
         "bicycle": {
-            "value": 50,
+            "value": 40,
             "comment": "number of long-term occupied vehicles (positive integer)"
         }
     },
