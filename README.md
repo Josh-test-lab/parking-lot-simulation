@@ -69,6 +69,7 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 5. Release version 1.0 (not contain `vehicle_occupied_long_term_event()`).
 6. Add new event `vehicle_occupied_long_term_event()`.
 7. Release version 2.0 (contain `vehicle_occupied_long_term_event()`).
+8. Update `README.md`.
 
 - 1131227
 
