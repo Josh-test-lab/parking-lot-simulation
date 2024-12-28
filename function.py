@@ -259,6 +259,26 @@ def save_result_to_picture_per_day(dataset, path_to_initial_value_json_file, pat
         'motorcycle and bicycle': 2 * max_motorcycle_parking_space
     }
 
+    threshold_map = {
+        'car': lambda data: data['parking_space_threshold']['car']['value'],
+        'bicycle': lambda data: data['parking_space_threshold']['motorcycle']['value'],
+        'motorcycle': lambda data: data['parking_space_threshold']['motorcycle']['value'],
+        'motorcycle and bicycle': lambda data: data['parking_space_threshold']['motorcycle']['value']
+    }
+
+    def configure_legend(ax, ax_right = None, bbox_to_anchor = (1.10, 1)):
+        handles_left, labels_left = ax.get_legend_handles_labels()
+        handles_right, labels_right = ax_right.get_legend_handles_labels() if ax_right else ([], [])
+        combined_handles = handles_left + handles_right
+        combined_labels = labels_left + labels_right
+        plt.legend(combined_handles, combined_labels, loc = 'upper left', bbox_to_anchor = bbox_to_anchor)
+
+    def save_plot(title, day, is_average, path_to_save_picture):
+        filename = f'{path_to_save_picture}\\{title}\\{title}_for_day_{'average' if is_average else day + 1}.png'
+        plt.tight_layout()
+        plt.savefig(filename, dpi = 300)
+        plt.close()
+
     for day in tqdm.tqdm(range(hour // 24)):
         daily_data = dataset.iloc[day * 24:(day + 1) * 24]
 
@@ -273,18 +293,19 @@ def save_result_to_picture_per_day(dataset, path_to_initial_value_json_file, pat
             plt.xticks(np.arange(0, 24, 1)) 
             plt.ylabel('Values')
             plt.title(f'Hourly data for {title} in day {'average' if is_average else day + 1}')
-            plt.legend(loc = 'upper left')
-
-            if title in max_space_map and max_motorcycle_parking_space != -1 and max_motorcycle_parking_space != -1:
-                ax = plt.gca()
-                ax_right = ax.twinx()
+            ax = plt.gca()
+            ax_right = None
+            if title in max_space_map and max_car_parking_space != -1 and max_motorcycle_parking_space != -1:
+                threshold = threshold_map.get(title, lambda data: data[title])(initial_value)
                 max_space = max_space_map[title]
+                ax_right = ax.twinx()
                 ax_right.set_ylim(ax.get_ylim())
-                ax_right.yaxis.set_major_formatter(mtick.PercentFormatter(xmax = max_space))
+                ax_right.yaxis.set_major_formatter(mtick.PercentFormatter(xmax=max_space))
                 ax_right.set_ylabel('Percentage')
+                ax_right.axhline(y = threshold * max_space, color = 'gray', linestyle = '--', linewidth = 1, label = f'{int(threshold * 100)}% threshold')
 
-            plt.savefig(f'{path_to_save_picture}\\{title}\\{title}_for_day_{'average' if is_average else day + 1}.png', dpi = 300)
-            plt.close()
+            configure_legend(ax, ax_right)
+            save_plot(title, day, is_average, path_to_save_picture)
 
     print(f'All pictures have been saved to "{path_to_save_picture}".')
 

@@ -14,6 +14,10 @@
             "value": -1,
             "comment": "maximum motorcycle parking spaces, -1 for infinite"
         },
+        "max_bicycle_parking_space": {
+            "value": 0,
+            "comment": "maximum bicycle parking spaces, -1 for infinite"
+        },
         "max_bicycle_parked_in_a_motorcycle_space": {
             "value": 2,
             "comment": "maximum bicycles parked in one motorcycle space"
@@ -62,6 +66,20 @@
             "park": [0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889],
             "leave": [0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889, 0.248888889],
             "comment": "probability of bicycle parking and leaving per hour (in 24h)(range between 0 and 1 and sum of car, motorcycle, bicycle parking (leaving) probabilities should less than 1)"
+        }
+    },
+    "parking_space_threshold": {
+        "car": {
+            "value": 0.8,
+            "comment": "Our desired parked threshold of car, must between 0 and 1"
+        },
+        "motorcycle": {
+            "value": 0.8,
+            "comment": "Our desired parked threshold of motorcycle, must between 0 and 1"
+        },
+        "bicycle": {
+            "value": 0.8,
+            "comment": "Our desired parked threshold of bicycle, must between 0 and 1"
         }
     }
 }
