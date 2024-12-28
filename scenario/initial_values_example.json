@@ -1,7 +1,7 @@
 {
     "simulation_time": {
         "max_simulation_time": {
-            "value": 87600,
+            "value": 8760,
             "comment": "max simulation time in hours"
         }
     },
