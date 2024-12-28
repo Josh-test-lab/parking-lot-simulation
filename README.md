@@ -29,19 +29,19 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 - After collation
 
 1. `dataset_sort1.0.xlsx`                >> The organized dataset.
-2. `Estimate num_passengers_v1224.xlsx`  >> The trial estimation for many parameters of target distributions.
+2. `Estimate num_passengers_v1226.xlsx`  >> The trial estimation for many parameters of target distributions.
 
 ## The Python files
 
 1. `main_program.py` >> The main program (simulation) project.
 2. `parking_test.py` >> To test whether all the events in `event.py` executes as expected.
 3. `event.py`        >> The events of the simulation.
-4. `function.py`     >> Functions.
+4. `function.py`     >> Other functions.
 
 ## The Scenarios
 
 1. Scenarios 1 >> Unlimited Parking Spaces.
-2. Scenarios 2 >> Current Parking Lot Configuration.
+2. Scenarios 2 >> Pre-Renovation Parking Lot.
 3. Scenarios 3 >> Post-Renovation Parking Lot.
 
 ## References
@@ -63,7 +63,12 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 - 1131228
 
 1. Detailed parameter adjustment.
-
+2. Update main porgram and main function `parking simulate()`.
+3. Update `Estimate num_passengers_v1226.xlsx`.
+4. Update all initial values.
+5. Release version 1.0 (not contain `vehicle_occupied_long_term_event()`).
+6. Add new event `vehicle_occupied_long_term_event()`.
+7. Release version 2.0 (contain `vehicle_occupied_long_term_event()`).
 
 - 1131227
 
@@ -152,11 +157,11 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 * [X] Initial system setup. (To be completed by Hsu.)
 * [X] Organize references and format them in APA style. (To be completed by Sin.)
 * [X] Add data on the number of people entering and exiting stations during different time periods and the proportions of transportation modes used. (To be completed by Sin.)
-* [ ] Passenger distribution across different time periods. (To be completed by Xie.)
+* [X] Passenger distribution across different time periods. (To be completed by Xie and Hsu.)
 * [X] Create the main flowchart. (To be completed by Xie and Hsu.)
 * [X] Create flowcharts for individual events. (To be completed by Hsu and Sin.)
-* [ ] Identify parameters that may need to be collected for the model.
-* [ ] Optimize and debug the model.
-* [ ] Complete system setup. (To be completed by Hsu, Xie, and Sin.)
+* [X] Identify parameters that may need to be collected for the model.
+* [X] Optimize and debug the model.
+* [X] Complete system setup. (To be completed by Hsu, Xie, and Sin.)
 * [ ] Phase 2: Increase model complexity (e.g., incorporate holidays, festivals, or other conditions).
-* [ ] Weekly meetings.
+* [X] Weekly meetings.
