@@ -98,6 +98,7 @@ def parking_simulate(path_to_initial_value_json_file):
     left_failed = []
     passengers_list = []
     clocks = []
+    reamin_space = []
     
     ## simulation 
     start_time = time.time()
@@ -153,6 +154,7 @@ def parking_simulate(path_to_initial_value_json_file):
         # passenger_list: [passenger_enter, passenger_leave, car_in, car_out, motorcycle_in, motorcycle_out, bicycle_in, bicycle_out, walker]
         passengers_list.append([passengers[0], passengers[1], new_vehicles[0][0], new_vehicles[0][1], new_vehicles[1][0], new_vehicles[1][1], new_vehicles[2][0], new_vehicles[2][1], int(round(np.sum(passengers) - np.sum(new_vehicles), 0))])
         clocks.append([t, clock])
+        reamin_space.append([remain_car_parking_space, remain_motorcycle_parking_space])
 
         # update time variables
         if clock == 23:
@@ -164,7 +166,7 @@ def parking_simulate(path_to_initial_value_json_file):
     end_time = time.time()
     CPU_time = end_time - start_time
 
-    return clocks, passengers_list, parked, parked_failed, left_failed, CPU_time
+    return clocks, passengers_list, parked, parked_failed, left_failed, reamin_space, CPU_time
 
 def save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_per_hour, file_name_average_per_hour):
     initial_value = load_initial_values(path_to_initial_value_json_file)
@@ -188,19 +190,21 @@ def save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_p
         {'name': 'bicycle_cannot_park', 'result_idx': 3, 'sub_idx': 2},
         {'name': 'car_left_failed', 'result_idx': 4, 'sub_idx': 0},
         {'name': 'motorcycle_left_failed', 'result_idx': 4, 'sub_idx': 1},
-        {'name': 'bicycle_left_failed', 'result_idx': 4, 'sub_idx': 2}
+        {'name': 'bicycle_left_failed', 'result_idx': 4, 'sub_idx': 2},
+        {'name': 'remain_car_parking_space', 'result_idx': 5, 'sub_idx': 0},
+        {'name': 'remain_motorcycle_parking_space', 'result_idx': 5, 'sub_idx': 1}
     ]
 
     data_per_hour = pd.DataFrame(index=range(max_simulation_time), columns=[col['name'] for col in column_mappings])
 
     for col in tqdm.tqdm(column_mappings):
         data_per_hour[col['name']] = [result[col['result_idx']][hour][col['sub_idx']] for hour in range(max_simulation_time)]
-    data_per_hour['CPU_time(in second)'] = [result[5]] + [None] * (len(data_per_hour) - 1)
+    data_per_hour['CPU_time(in second)'] = [result[6]] + [None] * (len(data_per_hour) - 1)
     data_per_hour.to_csv(file_name_data_per_hour, index = False)
     print(f'Date frame `data_per_hour` has been saved to "{file_name_data_per_hour}".')
 
     average_per_hour = data_per_hour.groupby('clock').mean().reset_index()
-    average_per_hour['CPU_time(in second)'] = [result[5]] + [None] * (len(average_per_hour) - 1)
+    average_per_hour['CPU_time(in second)'] = [result[6]] + [None] * (len(average_per_hour) - 1)
     average_per_hour.to_csv(file_name_average_per_hour, index = False)
     print(f'Date frame `average_per_hour` has been saved to "{file_name_average_per_hour}".')
 

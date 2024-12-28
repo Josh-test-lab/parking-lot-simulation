@@ -25,15 +25,15 @@
     },
     "number_of_spaces_parked": {
         "car_parked": {
-            "value": 0,
+            "value": 10,
             "comment": "number of cars parked"
         },
         "motorcycle_parked": {
-            "value": 0,
+            "value": 40,
             "comment": "number of motorcycles parked"
         },
         "bicycle_parked": {
-            "value": 0,
+            "value": 50,
             "comment": "number of bicycles parked"
         }
     },
