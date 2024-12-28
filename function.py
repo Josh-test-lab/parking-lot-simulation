@@ -26,7 +26,13 @@ def load_initial_values(path_to_initial_value_json_file):
     with open(path_to_initial_value_json_file, 'r', encoding = 'utf-8') as file:
         initial_value = json.load(file)
 
+    check_initial_values(initial_value)
+
     return initial_value
+
+def check_initial_values(initial_value):
+
+    return 
 
 def generate_new_passengers_per_hour(passenger_probability_per_hour, clock, normal_dist = False):
     """
