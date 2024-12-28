@@ -210,12 +210,12 @@ def save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_p
 
     for col in tqdm.tqdm(column_mappings):
         data_per_hour[col['name']] = [result[col['result_idx']][hour][col['sub_idx']] for hour in range(max_simulation_time)]
-    data_per_hour['CPU_time(in second)'] = [result[6]] + [None] * (len(data_per_hour) - 1)
+    data_per_hour['CPU_time(in second)'] = [result[7]] + [None] * (len(data_per_hour) - 1)
     data_per_hour.to_csv(file_name_data_per_hour, index = False)
     print(f'Date frame `data_per_hour` has been saved to "{file_name_data_per_hour}".')
 
     average_per_hour = data_per_hour.groupby('clock').mean().reset_index()
-    average_per_hour['CPU_time(in second)'] = [result[6]] + [None] * (len(average_per_hour) - 1)
+    average_per_hour['CPU_time(in second)'] = [result[7]] + [None] * (len(average_per_hour) - 1)
     average_per_hour.to_csv(file_name_average_per_hour, index = False)
     print(f'Date frame `average_per_hour` has been saved to "{file_name_average_per_hour}".')
 
