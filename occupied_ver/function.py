@@ -103,6 +103,7 @@ def parking_simulate(path_to_initial_value_json_file):
     passengers_list = []
     clocks = []
     reamin_space = []
+    vehicle_occupied_long_term_list = []
     
     ## simulation 
     start_time = time.time()
@@ -157,6 +158,7 @@ def parking_simulate(path_to_initial_value_json_file):
         left_failed.append([car_left_failed, motorcycle_left_failed, bicycle_left_failed])
         clocks.append([t, clock])
         reamin_space.append([remain_car_parking_space, remain_motorcycle_parking_space])
+        vehicle_occupied_long_term_list.append(vehicle_occupied_long_term)
         # passenger_list: [passenger_enter, passenger_leave, car_in, car_out, motorcycle_in, motorcycle_out, bicycle_in, bicycle_out, walker]
         passengers_list.append([passengers[0], passengers[1], new_vehicles[0][0], new_vehicles[0][1], new_vehicles[1][0], new_vehicles[1][1], new_vehicles[2][0], new_vehicles[2][1], int(round(np.sum(passengers) - np.sum(new_vehicles), 0))])
 
@@ -170,7 +172,7 @@ def parking_simulate(path_to_initial_value_json_file):
     end_time = time.time()
     CPU_time = end_time - start_time
 
-    return clocks, passengers_list, parked, parked_failed, left_failed, reamin_space, CPU_time
+    return clocks, passengers_list, parked, parked_failed, left_failed, reamin_space, vehicle_occupied_long_term_list, CPU_time
 
 def save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_per_hour, file_name_average_per_hour):
     initial_value = load_initial_values(path_to_initial_value_json_file)
@@ -196,19 +198,22 @@ def save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_p
         {'name': 'motorcycle_left_failed', 'result_idx': 4, 'sub_idx': 1},
         {'name': 'bicycle_left_failed', 'result_idx': 4, 'sub_idx': 2},
         {'name': 'remain_car_parking_space', 'result_idx': 5, 'sub_idx': 0},
-        {'name': 'remain_motorcycle_parking_space', 'result_idx': 5, 'sub_idx': 1}
+        {'name': 'remain_motorcycle_parking_space', 'result_idx': 5, 'sub_idx': 1},
+        {'name': 'car_occupied_long_term', 'result_idx': 6, 'sub_idx': 0},
+        {'name': 'motorcycle_occupied_long_term', 'result_idx': 6, 'sub_idx': 1},
+        {'name': 'bicycle_occupied_long_term', 'result_idx': 6, 'sub_idx': 2}
     ]
 
     data_per_hour = pd.DataFrame(index = range(max_simulation_time), columns = [col['name'] for col in column_mappings])
 
     for col in tqdm.tqdm(column_mappings):
         data_per_hour[col['name']] = [result[col['result_idx']][hour][col['sub_idx']] for hour in range(max_simulation_time)]
-    data_per_hour['CPU_time(in second)'] = [result[6]] + [None] * (len(data_per_hour) - 1)
+    data_per_hour['CPU_time(in second)'] = [result[7]] + [None] * (len(data_per_hour) - 1)
     data_per_hour.to_csv(file_name_data_per_hour, index = False)
     print(f'Date frame `data_per_hour` has been saved to "{file_name_data_per_hour}".')
 
     average_per_hour = data_per_hour.groupby('clock').mean().reset_index()
-    average_per_hour['CPU_time(in second)'] = [result[6]] + [None] * (len(average_per_hour) - 1)
+    average_per_hour['CPU_time(in second)'] = [result[7]] + [None] * (len(average_per_hour) - 1)
     average_per_hour.to_csv(file_name_average_per_hour, index = False)
     print(f'Date frame `average_per_hour` has been saved to "{file_name_average_per_hour}".')
 
@@ -222,9 +227,9 @@ def save_result_to_picture_per_day(dataset, path_to_initial_value_json_file, pat
     # define the groups of data to plot
     groups_to_plot = [
         ('passenger_enter', 'passenger_leave', 'passenger'),
-        ('car_parked', 'car_enter', 'car_leave', 'car_cannot_park', 'car_left_failed'),
-        ('motorcycle_parked', 'motorcycle_enter', 'motorcycle_leave', 'motorcycle_cannot_park', 'motorcycle_left_failed'),
-        ('bicycle_parked', 'bicycle_enter', 'bicycle_leave', 'bicycle_cannot_park', 'bicycle_left_failed'),
+        ('car_parked', 'car_enter', 'car_leave', 'car_cannot_park', 'car_left_failed', 'car_occupied_long_term'),
+        ('motorcycle_parked', 'motorcycle_enter', 'motorcycle_leave', 'motorcycle_cannot_park', 'motorcycle_left_failed', 'motorcycle_occupied_long_term'),
+        ('bicycle_parked', 'bicycle_enter', 'bicycle_leave', 'bicycle_cannot_park', 'bicycle_left_failed', 'bicycle_occupied_long_term'),
         ('walker',),
         ('car_parked', 'motorcycle_parked', 'bicycle_parked'),
         ('car_enter', 'motorcycle_enter', 'bicycle_enter'),
@@ -309,7 +314,7 @@ def save_result_to_picture_per_day(dataset, path_to_initial_value_json_file, pat
                 max_space = max_space_map[title]
                 ax_right = ax.twinx()
                 ax_right.set_ylim(ax.get_ylim())
-                ax_right.yaxis.set_major_formatter(mtick.PercentFormatter(xmax = max_space))
+                ax_right.yaxis.set_major_formatter(mtick.PercentFormatter(xmax=max_space))
                 ax_right.set_ylabel('Percentage')
                 ax_right.axhline(y = threshold * max_space, color = 'gray', linestyle = '--', linewidth = 1, label = f'{int(threshold * 100)}% threshold')
                 ax_right.axhline(y = max_space, color = 'red', linestyle = '--', linewidth = 1, label = f'Maximum parking space')
