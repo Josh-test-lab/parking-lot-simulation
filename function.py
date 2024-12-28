@@ -107,6 +107,7 @@ def parking_simulate(path_to_initial_value_json_file):
     passengers_list = []
     clocks = []
     reamin_space = []
+    vehicle_occupied_long_term_list = []
     
     ## simulation 
     start_time = time.time()
@@ -163,6 +164,7 @@ def parking_simulate(path_to_initial_value_json_file):
         passengers_list.append([passengers[0], passengers[1], new_vehicles[0][0], new_vehicles[0][1], new_vehicles[1][0], new_vehicles[1][1], new_vehicles[2][0], new_vehicles[2][1], int(round(np.sum(passengers) - np.sum(new_vehicles), 0))])
         clocks.append([t, clock])
         reamin_space.append([remain_car_parking_space, remain_motorcycle_parking_space])
+        vehicle_occupied_long_term_list.append(vehicle_occupied_long_term)
 
         # update time variables
         if clock == 23:
@@ -174,7 +176,7 @@ def parking_simulate(path_to_initial_value_json_file):
     end_time = time.time()
     CPU_time = end_time - start_time
 
-    return clocks, passengers_list, parked, parked_failed, left_failed, reamin_space, vehicle_occupied_long_term, CPU_time
+    return clocks, passengers_list, parked, parked_failed, left_failed, reamin_space, vehicle_occupied_long_term_list, CPU_time
 
 def save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_per_hour, file_name_average_per_hour):
     initial_value = load_initial_values(path_to_initial_value_json_file)
