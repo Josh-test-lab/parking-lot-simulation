@@ -15,7 +15,7 @@
             "comment": "maximum motorcycle parking spaces, -1 for infinite"
         },
         "max_bicycle_parking_space": {
-            "value": 600,
+            "value": -1,
             "comment": "maximum bicycle parking spaces, -1 for infinite"
         },
         "max_bicycle_parked_in_a_motorcycle_space": {
@@ -26,15 +26,15 @@
     "number_of_spaces_parked": {
         "car_parked": {
             "value": 10,
-            "comment": "number of cars parked"
+            "comment": "initial value of cars parked"
         },
         "motorcycle_parked": {
             "value": 40,
-            "comment": "number of motorcycles parked"
+            "comment": "initial value of motorcycles parked"
         },
         "bicycle_parked": {
             "value": 50,
-            "comment": "number of bicycles parked"
+            "comment": "initial value of bicycles parked"
         }
     },
     "passenger_probability_per_hour": {
