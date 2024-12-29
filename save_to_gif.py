@@ -27,11 +27,12 @@ folders = [
     ]
 
 for idx in range(1,4):
-    for folder in tqdm.tqdm(folders):
-        print(f'\nConverting "{folder}" in "scenario_{idx}"...')
-        path_to_image_folder = f'scenario\\scenario_{idx}\\data_per_hour\\{folder}'
-        path_to_output_gif = f'scenario\\scenario_{idx}\\data_per_hour\\{folder}.gif'
-        images_to_gif(path_to_image_folder, path_to_output_gif, duration = 0.5, loop = 1)
+    for dir in ['data_per_hour', 'data_per_day']:
+        for folder in tqdm.tqdm(folders):
+            print(f'\nConverting "{folder}" in "scenario_{idx}"...')
+            path_to_image_folder = f'scenario\\scenario_{idx}\\{dir}\\{folder}'
+            path_to_output_gif = f'scenario\\scenario_{idx}\\{dir}\\{folder}.gif'
+            images_to_gif(path_to_image_folder, path_to_output_gif, duration = 0.8, loop = 1)
 
 end_time = time.time()
 print(f'Done!')

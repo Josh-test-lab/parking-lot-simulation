@@ -35,7 +35,7 @@ data_per_hour, average_per_hour = save_result_to_csv(result, path_to_initial_val
 
 # store results to pictures
 save_result_to_picture(average_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_1\\average_per_hour', image_is_hourly_or_daily = 'hourly')
-#save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_1\\data_per_hour', image_is_hourly_or_daily = 'hourly')
+save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_1\\data_per_hour', image_is_hourly_or_daily = 'hourly')
 save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_1\\data_per_day', image_is_hourly_or_daily = 'daily')
 
 
@@ -61,7 +61,7 @@ data_per_hour, average_per_hour = save_result_to_csv(result, path_to_initial_val
 
 # store results to pictures
 save_result_to_picture(average_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_2\\average_per_hour', image_is_hourly_or_daily = 'hourly')
-#save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_2\\data_per_hour', image_is_hourly_or_daily = 'hourly')
+save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_2\\data_per_hour', image_is_hourly_or_daily = 'hourly')
 save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_2\\data_per_day', image_is_hourly_or_daily = 'daily')
 
 
@@ -87,11 +87,53 @@ data_per_hour, average_per_hour = save_result_to_csv(result, path_to_initial_val
 
 # store results to pictures
 save_result_to_picture(average_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_3\\average_per_hour', image_is_hourly_or_daily = 'hourly')
-#save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_3\\data_per_hour', image_is_hourly_or_daily = 'hourly')
+save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_3\\data_per_hour', image_is_hourly_or_daily = 'hourly')
 save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_3\\data_per_day', image_is_hourly_or_daily = 'daily')
 
 end_time = time.time()
 print(f'Cost {end_time - start_time} seconds.')
+
+
+
+
+
+## save to image
+### import module
+from images_to_gif.images_to_gif import images_to_gif
+import tqdm
+import time
+
+### main program
+start_time = time.time()
+folders = [
+        'passenger',
+        'car',
+        'motorcycle',
+        'bicycle',
+        'walker',
+        'total parked',
+        'total enter',
+        'total leave',
+        'total cannot park',
+        'total left failed',
+        'motorcycle and bicycle'
+    ]
+
+for idx in range(1,4):
+    for dir in ['data_per_hour', 'data_per_day']:
+        for folder in tqdm.tqdm(folders):
+            print(f'\nConverting "{folder}" in "scenario_{idx}"...')
+            path_to_image_folder = f'scenario\\scenario_{idx}\\{dir}\\{folder}'
+            path_to_output_gif = f'scenario\\scenario_{idx}\\{dir}\\{folder}.gif'
+            images_to_gif(path_to_image_folder, path_to_output_gif, duration = 0.8, loop = 1)
+
+end_time = time.time()
+print(f'Done!')
+print(f'Cost {end_time - start_time} seconds.') 
+
+
+
+
+
+
 input(f'Press any key to continue...')
-
-
