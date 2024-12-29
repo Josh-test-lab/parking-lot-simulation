@@ -34,8 +34,9 @@ print(f'CPU time is {result[7]} seconds.')
 data_per_hour, average_per_hour = save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_per_hour, file_name_average_per_hour)
 
 # store results to pictures
-save_result_to_picture_per_day(average_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_1\\average_per_hour')
-#save_result_to_picture_per_day(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_1\\data_per_hour')
+save_result_to_picture(average_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_1\\average_per_hour', image_is_hourly_or_daily = 'hourly')
+#save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_1\\data_per_hour', image_is_hourly_or_daily = 'hourly')
+save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_1\\data_per_day', image_is_hourly_or_daily = 'daily')
 
 
 
@@ -59,8 +60,9 @@ print(f'CPU time is {result[7]} seconds.')
 data_per_hour, average_per_hour = save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_per_hour, file_name_average_per_hour)
 
 # store results to pictures
-save_result_to_picture_per_day(average_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_2\\average_per_hour')
-#save_result_to_picture_per_day(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_2\\data_per_hour')
+save_result_to_picture(average_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_2\\average_per_hour', image_is_hourly_or_daily = 'hourly')
+#save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_2\\data_per_hour', image_is_hourly_or_daily = 'hourly')
+save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_2\\data_per_day', image_is_hourly_or_daily = 'daily')
 
 
 
@@ -84,8 +86,9 @@ print(f'CPU time is {result[7]} seconds.')
 data_per_hour, average_per_hour = save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_per_hour, file_name_average_per_hour)
 
 # store results to pictures
-save_result_to_picture_per_day(average_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_3\\average_per_hour')
-#save_result_to_picture_per_day(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_3\\data_per_hour')
+save_result_to_picture(average_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_3\\average_per_hour', image_is_hourly_or_daily = 'hourly')
+#save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_3\\data_per_hour', image_is_hourly_or_daily = 'hourly')
+save_result_to_picture(data_per_hour, path_to_initial_value_json_file, 'scenario\\scenario_3\\data_per_day', image_is_hourly_or_daily = 'daily')
 
 end_time = time.time()
 print(f'Cost {end_time - start_time} seconds.')

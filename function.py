@@ -281,7 +281,7 @@ def save_result_to_csv(result, path_to_initial_value_json_file, file_name_data_p
 
     return data_per_hour, average_per_hour
 
-def save_result_to_picture_per_day(dataset, path_to_initial_value_json_file, path_to_save_picture):
+def save_result_to_picture(dataset, path_to_initial_value_json_file, path_to_save_picture, image_is_hourly_or_daily = 'hourly'):
     initial_value = load_initial_values(path_to_initial_value_json_file)
     max_car_parking_space = initial_value['parking_spaces']['max_car_parking_space']['value']
     max_motorcycle_parking_space = initial_value['parking_spaces']['max_motorcycle_parking_space']['value']
@@ -315,11 +315,6 @@ def save_result_to_picture_per_day(dataset, path_to_initial_value_json_file, pat
         'motorcycle and bicycle'
     ]
 
-    hour = len(dataset)
-    if hour < 24:
-        raise ValueError('Not enough data to plot. At least 24 hours.')
-    is_average = hour == 24
-
     for title in titles:
         os.makedirs(os.path.join(path_to_save_picture, title), exist_ok = True)
 
@@ -349,45 +344,82 @@ def save_result_to_picture_per_day(dataset, path_to_initial_value_json_file, pat
         combined_labels = labels_left + labels_right
         plt.legend(combined_handles, combined_labels, loc = 'upper left', bbox_to_anchor = bbox_to_anchor)
 
-    def save_plot(title, day, is_average, path_to_save_picture):
-        filename = f'{path_to_save_picture}\\{title}\\{title}_for_day_{'average' if is_average else day + 1}.png'
+    def save_plot(title, day_or_hour, is_average, path_to_save_picture, is_hourly = True):
+        filename = f'{path_to_save_picture}\\{title}\\{title}_for_{'day' if is_hourly else 'hour'}_{'average' if is_average else day_or_hour + 1}.png'
         plt.tight_layout()
         plt.savefig(filename, dpi = 300)
         plt.close()
 
-    for day in tqdm.tqdm(range(hour // 24)):
-        daily_data = dataset.iloc[day * 24:(day + 1) * 24]
+    hour = len(dataset)
+    if image_is_hourly_or_daily == 'hourly':
+        if hour < 24:
+            raise ValueError('Not enough data to plot. At least 24 hours.')
+        is_average = hour == 24
+        
+        for day in tqdm.tqdm(range(hour // 24)):
+            daily_data = dataset.iloc[day * 24:(day + 1) * 24]
 
-        # plot the data
-        for group, title in zip(groups_to_plot, titles):
-            plt.figure(figsize = (10, 6))
-            for col in group:
-                y_values = y_values_map.get(col, lambda data: data[col])(daily_data)
-                plt.plot(daily_data['clock'], y_values, label = col)
-                
-            plt.xlabel('Hour')
-            plt.xticks(np.arange(0, 24, 1))
-            plt.ylabel(f'Values ({max_bicycle_parked_in_a_motorcycle_space} * motorcycle & 1 * bicycle)' if title == 'motorcycle and bicycle' else 'Values')
-            plt.title(f'Hourly data for {title} in day {'average' if is_average else day + 1}')
-            ax = plt.gca()
-            ax_right = None
-            if title in max_space_map and max_car_parking_space != -1 and max_motorcycle_parking_space != -1:
-                threshold = threshold_map.get(title, lambda data: data[title])(initial_value)
-                max_space = max_space_map[title]
-                ax_right = ax.twinx()
-                ax_right.set_ylim(ax.get_ylim())
-                ax_right.yaxis.set_major_formatter(mtick.PercentFormatter(xmax=max_space))
-                ax_right.set_ylabel('Percentage')
-                ax_right.axhline(y = threshold * max_space, color = 'gray', linestyle = '--', linewidth = 1, label = f'{int(threshold * 100)}% threshold')
-                ax_right.axhline(y = max_space, color = 'red', linestyle = '--', linewidth = 1, label = f'Maximum parking space')
+            # plot the data
+            for group, title in zip(groups_to_plot, titles):
+                plt.figure(figsize = (10, 6))
+                for col in group:
+                    y_values = y_values_map.get(col, lambda data: data[col])(daily_data)
+                    plt.plot(daily_data['clock'], y_values, label = col)
+                    
+                plt.xlabel('Hour')
+                plt.xticks(np.arange(0, 24, 1))
+                plt.ylabel(f'Values ({max_bicycle_parked_in_a_motorcycle_space} * motorcycle & 1 * bicycle)' if title == 'motorcycle and bicycle' else 'Values')
+                plt.title(f'Hourly data for {title} of day {'average' if is_average else day + 1}')
+                ax = plt.gca()
+                ax_right = None
+                if title in max_space_map and max_car_parking_space != -1 and max_motorcycle_parking_space != -1:
+                    threshold = threshold_map.get(title, lambda data: data[title])(initial_value)
+                    max_space = max_space_map[title]
+                    ax_right = ax.twinx()
+                    ax_right.set_ylim(ax.get_ylim())
+                    ax_right.yaxis.set_major_formatter(mtick.PercentFormatter(xmax = max_space))
+                    ax_right.set_ylabel('Percentage')
+                    ax_right.axhline(y = threshold * max_space, color = 'gray', linestyle = '--', linewidth = 1, label = f'{int(threshold * 100)}% threshold')
+                    ax_right.axhline(y = max_space, color = 'red', linestyle = '--', linewidth = 1, label = f'Maximum parking space')
 
-            configure_legend(ax, ax_right)
-            save_plot(title, day, is_average, path_to_save_picture)
+                configure_legend(ax, ax_right)
+                save_plot(title, day, is_average, path_to_save_picture, is_hourly = True)
+
+    elif image_is_hourly_or_daily == 'daily':
+        if hour > 24:
+            hour = 24
+        dataset = [group for _, group in dataset.groupby('clock')]
+
+        for h in tqdm.tqdm(range(hour)):
+            hourly_data = dataset[h]
+
+            # plot the data
+            for group, title in zip(groups_to_plot, titles):
+                plt.figure(figsize = (10, 6))
+                for col in group:
+                    y_values = y_values_map.get(col, lambda data: data[col])(hourly_data)
+                    plt.plot(range(1, len(hourly_data) + 1), y_values, label = col)
+                    
+                plt.xlabel('Day')
+                plt.ylabel(f'Values ({max_bicycle_parked_in_a_motorcycle_space} * motorcycle & 1 * bicycle)' if title == 'motorcycle and bicycle' else 'Values')
+                plt.title(f'Daily data for {title} at hour {h}')
+                ax = plt.gca()
+                ax_right = None
+                if title in max_space_map and max_car_parking_space != -1 and max_motorcycle_parking_space != -1:
+                    threshold = threshold_map.get(title, lambda data: data[title])(initial_value)
+                    max_space = max_space_map[title]
+                    ax_right = ax.twinx()
+                    ax_right.set_ylim(ax.get_ylim())
+                    ax_right.yaxis.set_major_formatter(mtick.PercentFormatter(xmax = max_space))
+                    ax_right.set_ylabel('Percentage')
+                    ax_right.axhline(y = threshold * max_space, color = 'gray', linestyle = '--', linewidth = 1, label = f'{int(threshold * 100)}% threshold')
+                    ax_right.axhline(y = max_space, color = 'red', linestyle = '--', linewidth = 1, label = f'Maximum parking space')
+
+                configure_legend(ax, ax_right)
+                save_plot(title, h - 1, False, path_to_save_picture, is_hourly = False)
 
     print(f'All pictures have been saved to "{path_to_save_picture}".')
-
-
-
+    return
 
 
     

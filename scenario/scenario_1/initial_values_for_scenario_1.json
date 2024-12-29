@@ -47,7 +47,7 @@
             "comment": "standard deviation of passenger probability per hour (in 24h)"
         },
         "passenger_enter_rate": {
-            "value": [0, 0, 0, 0, 0, 0.7, 1, 1, 0.7, 0.7, 0.7, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.3, 0.3, 0.3, 0.3, 0.1, 0],
+            "value": [0, 0, 0, 0, 0, 0.7, 1, 1, 0.7, 0.7, 0.6, 0.5, 0.5, 0.3, 0.5, 0.6, 0.5, 0.4, 0.3, 0.2, 0.2, 0.2, 0.1, 0],
             "comment": "passenger enter to the station rate per hour (in 24h)(range between 0 and 1)"
         }
     },
