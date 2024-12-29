@@ -1,7 +1,7 @@
 """
 Title: Functions for parking model for the parking lot in Zhixue station
 Author: Hsu, Yao-Chih, Xie, Yi-Xuan, Sin, Wen-Lee
-Version: 1131227, 1131226, 1131225, 1131224, 1131223, 1131222, 1131220, 1131218
+Version: 1131229, 1131228, 1131227, 1131226, 1131225, 1131224, 1131223, 1131222, 1131220, 1131218
 Reference: Class of Simulation Study by C. Wang at 2024 fall
 """
 
@@ -31,7 +31,59 @@ def load_initial_values(path_to_initial_value_json_file):
     return initial_value
 
 def check_initial_values(initial_value):
+    if not isinstance(initial_value['simulation_time']['max_simulation_time']['value'], int) or initial_value['simulation_time']['max_simulation_time']['value'] <= 0:
+        raise ValueError(f'"max_simulation_time" in "simulation_time" must be a positive integer.')
+    
+    parking_spaces = initial_value['parking_spaces']
+    for key, value in parking_spaces.items():
+        if key == 'max_bicycle_parked_in_a_motorcycle_space':
+            if not isinstance(value['value'], int) or value['value'] <= 0:
+                raise ValueError(f'"{key}" in "parking_spaces" must be a positive integer.')
+        else:
+            if not (isinstance(value['value'], int) and value['value'] >= -1):
+                raise ValueError(f'"{key}" in "parking_spaces" must be a positive integer, or "-1" for infinite.')
+            
+    number_of_spaces_parked = initial_value['number_of_spaces_parked']
+    for key, value in number_of_spaces_parked.items():
+        if not isinstance(value['value'], int) or value['value'] < 0:
+            raise ValueError(f'"{key}" at "number_of_spaces_parked" must be a non-negative integer.')
+        if not (value['value'] <= parking_spaces[f'max_{key.split('_')[0]}_parking_space']['value'] or parking_spaces[f'max_{key.split('_')[0]}_parking_space']['value'] == -1):
+            raise ValueError(f'"{key}" at "number_of_spaces_parked" must less than "max_{key.split('_')[0]}_parking_space" at "parking_spaces".')
 
+    passenger_probability_per_hour = initial_value['passenger_probability_per_hour']
+    for key, value in passenger_probability_per_hour.items():
+        if len(value['value']) != 24:
+            raise ValueError(f'"{key}" must contain 24 digits, there are only {len(value['value'])}.')
+    for key in ['mean', 'std']:
+        for v in passenger_probability_per_hour[key]['value']:
+            if not (isinstance(v, (int, float)) and v >= 0):
+                raise ValueError(f'All values in "{key}" at "passenger_probability_per_hour" must greater than 0.')
+    for v in passenger_probability_per_hour['passenger_enter_rate']['value']:
+        if not (isinstance(v, (int, float)) and 0 <= v <= 1):
+            raise ValueError(f'All values in "passenger_enter_rate" at "passenger_probability_per_hour" must between 0 and 1.')
+
+    vehicle_probability_per_hour = initial_value['vehicle_probability_per_hour']
+    for vehicle_type, vehicle_data in vehicle_probability_per_hour.items():
+        for action in ['park', 'leave']:
+            values = vehicle_data[action]
+            if len(values) != 24:
+                raise ValueError(f'"{action}" in "vehicle_probability_per_hour["{vehicle_type}"]" must contain 24 digits.')
+            if any(not isinstance(v, (int, float)) or v < 0 or v > 1 for v in values):
+                raise ValueError(f'All values in "{action}" at "vehicle_probability_per_hour["{vehicle_type}"]" must be a float between 0 and 1.')
+
+    number_of_vehicle_occupied_long_term = initial_value['number_of_vehicle_occupied_long_term']
+    for key, value in number_of_vehicle_occupied_long_term.items():
+        if not isinstance(value['value'], int) or value['value'] < 0:
+            raise ValueError(f'"{key}" at "number_of_vehicle_occupied_long_term" must be a non-negative integer.')
+        if not (value['value'] <= parking_spaces[f'max_{key.split('_')[0]}_parking_space']['value'] or parking_spaces[f'max_{key.split('_')[0]}_parking_space']['value'] == -1):
+            raise ValueError(f'"{key}" at "number_of_vehicle_occupied_long_term" must less than "max_{key.split('_')[0]}_parking_space" at "parking_spaces".')
+
+    parking_space_threshold = initial_value['parking_space_threshold']
+    for vehicle_type, vehicle_data in parking_space_threshold.items():
+        value = vehicle_data['value']
+        if not isinstance(value, (int, float)) or value < 0 or value > 1:
+            raise ValueError(f'"{vehicle_type}" at "parking_space_threshold" must be a float between 0 and 1.')
+    
     return 
 
 def generate_new_passengers_per_hour(passenger_probability_per_hour, clock, normal_dist = False):
