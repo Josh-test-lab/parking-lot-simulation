@@ -25,16 +25,16 @@
     },
     "number_of_spaces_parked": {
         "car_parked": {
-            "value": 10,
-            "comment": "initial value of cars parked"
+            "value": 15,
+            "comment": "number of cars parked"
         },
         "motorcycle_parked": {
-            "value": 40,
-            "comment": "initial value of motorcycles parked"
+            "value": 120,
+            "comment": "number of motorcycles parked"
         },
         "bicycle_parked": {
-            "value": 50,
-            "comment": "initial value of bicycles parked"
+            "value": 120,
+            "comment": "number of bicycles parked"
         }
     },
     "passenger_probability_per_hour": {
