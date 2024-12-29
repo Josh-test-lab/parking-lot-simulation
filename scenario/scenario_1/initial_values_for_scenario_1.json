@@ -15,7 +15,7 @@
             "comment": "maximum motorcycle parking spaces, -1 for infinite"
         },
         "max_bicycle_parking_space": {
-            "value": 0,
+            "value": -1,
             "comment": "maximum bicycle parking spaces, -1 for infinite"
         },
         "max_bicycle_parked_in_a_motorcycle_space": {
