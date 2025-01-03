@@ -12,9 +12,9 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 | **Reference**       | Please view the complete reference below                                                                                                      |
 | **Github**          | https://github.com/Josh-test-lab/parking-lot-simulation/                                                                                      |
 | **Google Calender** | https://calendar.google.com/calendar/embed?src=c_7b5c1307c48fd66cdba1307b1c698cf1d1f71d90f64bf6466efbace8e6649e35%40group.calendar.google.com |
-| **Flowchart**       | https://github.com/Josh-test-lab/parking-lot-simulation/tree/main/flowchart                                                         |
-| **Report**          | https://github.com/Josh-test-lab/parking-lot-simulation/blob/main/report.pdf                                                                                             |
-| **Presentation**    | https://github.com/Josh-test-lab/parking-lot-simulation/blob/main/presentation.pdf                                                                                             |
+| **Flowchart**       | https://github.com/Josh-test-lab/parking-lot-simulation/tree/main/flowchart                                                                   |
+| **Report**          | https://github.com/Josh-test-lab/parking-lot-simulation/blob/main/report.pdf                                                                  |
+| **Presentation**    | https://github.com/Josh-test-lab/parking-lot-simulation/blob/main/presentation.pdf                                                            |
 
 ## The datasets
 
@@ -37,6 +37,10 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 3. `event.py`        >> The events of the simulation.
 4. `function.py`     >> Other functions.
 
+## The R files
+
+1. `Parking_Lot_System.Rmd` >> The simple model with car and motorcycle only.
+
 ## The Scenarios
 
 1. Scenarios 1 >> Unlimited Parking Spaces.
@@ -58,6 +62,9 @@ This simulation is about the parking problem in the parking lot of Zhixue statio
 11. R. C. Larson, & A. R. Odoni (1981). *Urban Operation Research.* Massachusetts Institute of Technology. https://web.mit.edu/urban_or_book/www/book/index.html
 
 ## Version history
+
+- 1140103
+1. Upload the `Parking_Lot_System.Rmd`.
 
 - 1140102
 
