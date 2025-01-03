@@ -1,0 +1,152 @@
+---
+title: "Parking_Lot_System"
+output: html_document
+date: "2024-12-16"
+---
+
+# Parameters of distributions
+```{r}
+a = c(10, 31, 21, 42, 31, 21, 21, 10, 21, 33, 21, 21, 47, 50, 16, 33, 10, 0, 21)
+b = c(0.7, 1, 1, 0.7, 0.7, 0.6, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.3, 0.2, 0.2, 0.2, 0.1, 0)
+m_in = rep(0.35, 19)
+m_out = rep(0.35, 19)
+c_in = rep(0.2, 19)
+c_out = rep(0.2, 19)
+```
+
+# Initialization function
+```{r}
+initialize = function() {
+
+  # Initialize the simulation clock.
+  sim_time <<- 0
+  
+  # Initialize the state variables.
+  num_motorcycle_in_parking_plot <<- 20
+  num_car_in_parking_plot <<- 10
+  num_people <<- vector("numeric")
+  num_people_in <<- vector("numeric")
+  num_people_out <<- vector("numeric")
+  new_motorcycle_in <<- vector("numeric")
+  new_motorcycle_out <<- vector("numeric")
+  new_car_in <<- vector("numeric")
+  new_car_out <<- vector("numeric")
+  
+  # # Initialize the output variables
+  
+  # Initialize the event list.
+  time_next_event <<- 5:23
+}
+```
+
+# Timing function
+```{r}
+timing = function() {
+  
+  min_time_next_event <<- min(time_next_event)
+  # Identify the next event type.
+  next_event_type <<- which.min(time_next_event)
+
+  # Check to see whether the event list is empty.
+  if (min_time_next_event >= 1.0e+20) {
+    # The event list is empty, so stop the simulation.
+    cat(sprintf("\nEvent list empty at time %f", sim_time))
+    stop("Simulation terminated: Event list empty.")
+  }
+
+  # The event list is not empty, so advance the simulation clock.
+  sim_time <<- min_time_next_event
+}
+```
+
+# Main function
+```{r}
+main_prog_Parking_Lot_system = function(num_days = 1){
+  
+  # initialize the simulation
+  initialize()
+  
+  # Run the simulation until we reach our desired number of days
+  for ( i in 1: num_days){
+    
+    # Simulate single day
+    while (TRUE) {
+      
+      # Determine which hour the next event at
+      timing()
+      
+      # Invoke the update event function
+      update_event()
+      
+      # End a day
+      if (next_event_type == 19){
+        break
+      }
+    }
+  }
+}
+```
+
+# Update event
+```{r}
+update_event = function(){
+  # The update event at the i th hour
+  i = next_event_type
+  
+  # Schedule the next update event at the i th hour
+  time_next_event[i] <<- sim_time + 24
+  
+  # Update number of people at the i th hour
+  # num_people[i] <<- floor(rnorm(1, mean = a[i], sd = 1))
+  num_people[i] <<- rpois(1, lambda = a[i])
+  
+  # Update number of people into or leaving the station at the i th hour
+  num_people_in[i] <<- floor(num_people[i]*b[i])
+  num_people_out[i] <<- num_people[i] - num_people_in[i]
+  
+  # Update demand for motorcycle parking at the i th hour
+  new_motorcycle_in[i] <<- floor(num_people_in[i]*m_in[i])
+  new_motorcycle_out[i] <<- floor(num_people_out[i]*m_out[i])
+  
+  # Update demand for car parking at the i th hour
+  new_car_in[i] <<- floor(num_people_in[i]*c_in[i])
+  new_car_out[i] <<- floor(num_people_out[i]*c_out[i])
+  
+  # Update the state of parking spaces at the i th hour
+  temp <<- num_motorcycle_in_parking_plot[length(num_motorcycle_in_parking_plot)] + new_motorcycle_in[i] - new_motorcycle_out[i]
+  num_motorcycle_in_parking_plot <<- append(num_motorcycle_in_parking_plot, temp)
+  temp <<- num_car_in_parking_plot[length(num_car_in_parking_plot)] + new_car_in[i] - new_car_out[i]
+  num_car_in_parking_plot <<- append(num_car_in_parking_plot, temp)
+}
+```
+
+# Compute operation time
+```{r}
+operation_time <- system.time({
+  num_days <<- 1000
+  main_prog_Parking_Lot_system(num_days = num_days)
+})
+```
+
+# Time plot of the important variable
+```{r}
+plot(x = 5:23, 
+     y = num_car_in_parking_plot[(length(num_car_in_parking_plot) -18):length(num_car_in_parking_plot)],
+     type = "l",
+     xlab = "hour",
+     ylab = "",
+     main = "Number of car in the parking lot")
+axis(1, at = 5:23)
+```
+
+```{r}
+plot(x = 5:23, 
+     y = num_motorcycle_in_parking_plot[(length(num_motorcycle_in_parking_plot) -18):length(num_motorcycle_in_parking_plot)],
+     type = "l",
+     xlab = "hour",
+     ylab = "",
+     main = "Number of motorcycle in the parking lot")
+axis(1, at = 5:23)
+```
+
+
